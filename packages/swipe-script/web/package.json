@@ -1,0 +1,31 @@
+{
+  "private": true,
+  "name": "@mr-ss/web",
+  "version": "1.0.0",
+  "prisma": {
+    "schema": "@mr-ss/database/prisma/schema.prisma",
+    "seed": "tsx @mr-ss/database/src/seed.ts"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@prisma/nextjs-monorepo-workaround-plugin": "^5.4.2",
+    "next": "^13.5.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@mr-ss/database": "workspace:*",
+    "@mr/config": "workspace:*",
+    "@mr/tsconfig": "workspace:*",
+    "@types/node": "^20.8.7",
+    "@types/react": "^18.2.29",
+    "@types/react-dom": "^18.2.13",
+    "eslint": "^8.51.0",
+    "typescript": "^5.2.2"
+  }
+}

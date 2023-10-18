@@ -1,14 +1,13 @@
-import { prisma } from ".";
-
-import type { User } from "@prisma/client";
+// If there's a compile error here, make sure to run `pnpm run db:generate` first, so the client gets generated
+// Still an error? Ctrl + Shift + P -> Restart TS Server
+import { prisma, type User } from "./client";
 
 const DEFAULT_USERS = [
-  // Add your own user to pre-populate the database with
   {
-    name: "Tim Apple",
-    email: "tim@apple.com",
+    name: "Sjoerd van Bommel",
+    email: "sjoerd.van.bommel@hotmail.com",
   },
-] as Array<Partial<User>>;
+] satisfies Partial<User>[];
 
 (async () => {
   try {

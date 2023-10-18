@@ -1,0 +1,10 @@
+{
+  "extends": ["//"],
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "db:migrate:dev": {
+      "dependsOn": ["^db:generate"],
+      "cache": false
+    }
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "name": "config",
+  "name": "@mr/config",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -7,12 +7,12 @@
     "eslint-preset.js"
   ],
   "dependencies": {
-    "eslint-config-next": "^13.4.1",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-react": "7.28.0",
-    "eslint-config-turbo": "^1.9.3"
+    "eslint-config-next": "^13.5.5",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-turbo": "^1.10.15",
+    "eslint-plugin-react": "7.28.0"
   },
   "devDependencies": {
-    "typescript": "^4.5.3"
+    "typescript": "^5.2.2"
   }
 }
