@@ -8,9 +8,9 @@ importers:
 
   .:
     devDependencies:
-      '@mr/tsconfig':
+      '@mr/config':
         specifier: workspace:^
-        version: link:packages/tsconfig
+        version: link:packages/config
       prettier:
         specifier: ^3.0.3
         version: 3.0.3
@@ -43,6 +43,8 @@ importers:
         specifier: ^5.2.2
         version: 5.2.2
 
+  packages/pg-admin: {}
+
   packages/swipe-script/database:
     dependencies:
       '@prisma/client':
@@ -52,9 +54,6 @@ importers:
       '@mr/config':
         specifier: workspace:*
         version: link:../../config
-      '@mr/tsconfig':
-        specifier: workspace:*
-        version: link:../../tsconfig
       '@types/node':
         specifier: ^20.8.7
         version: 20.8.7
@@ -98,9 +97,6 @@ importers:
       '@mr/config':
         specifier: workspace:*
         version: link:../../config
-      '@mr/tsconfig':
-        specifier: workspace:*
-        version: link:../../tsconfig
       '@types/node':
         specifier: ^20.8.7
         version: 20.8.7
@@ -116,8 +112,6 @@ importers:
       typescript:
         specifier: ^5.2.2
         version: 5.2.2
-
-  packages/tsconfig: {}
 
 packages:
 

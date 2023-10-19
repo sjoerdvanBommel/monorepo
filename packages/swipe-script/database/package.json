@@ -31,7 +31,6 @@
   },
   "devDependencies": {
     "@mr/config": "workspace:*",
-    "@mr/tsconfig": "workspace:*",
     "@types/node": "^20.8.7",
     "eslint": "^8.51.0",
     "prisma": "^5.4.2",

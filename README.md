@@ -7,8 +7,7 @@ Welcome to my monorepo! This README guide will walk you through the steps to get
 ### Current packages
 
 **General**
-- `@mr/config` for ESLint configuration
-- `@mr/tsconfig` for all tsconfig files to keep things consistent over different projects
+- `@mr/config` for ESLint and TypeScript config files to keep things consistent over different projects
 - `@mr/pg-admin` to spin up a PgAdmin docker container. Make sure to read it's [README](./packages/pg-admin/README.md) if you're going to use it.
 
 **SwipeScript**

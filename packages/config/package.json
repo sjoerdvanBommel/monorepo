@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "files": [
-    "eslint-preset.js"
-  ],
   "dependencies": {
     "eslint-config-next": "^13.5.5",
     "eslint-config-prettier": "^9.0.0",
