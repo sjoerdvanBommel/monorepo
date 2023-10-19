@@ -1,13 +1,13 @@
-import { prisma, type User } from "./client";
+import { prisma, type User } from './client'
 
 const DEFAULT_USERS = [
   {
-    name: "Sjoerd van Bommel",
-    email: "sjoerd.van.bommel@hotmail.com",
+    name: 'Sjoerd van Bommel',
+    email: 'sjoerd.van.bommel@hotmail.com',
   },
-] satisfies Partial<User>[];
+] satisfies Partial<User>[]
 
-(async () => {
+;(async () => {
   try {
     await Promise.all(
       DEFAULT_USERS.map((user) =>
@@ -21,13 +21,13 @@ const DEFAULT_USERS = [
           create: {
             ...user,
           },
-        })
-      )
-    );
+        }),
+      ),
+    )
   } catch (error) {
-    console.error(error);
-    process.exit(1);
+    console.error(error)
+    process.exit(1)
   } finally {
-    await prisma.$disconnect();
+    await prisma.$disconnect()
   }
-})();
+})()

@@ -7,27 +7,27 @@ Welcome to my monorepo! This README guide will walk you through the steps to get
 ### Current packages
 
 **General**
+
 - `@mr/config` for ESLint and TypeScript config files to keep things consistent over different projects
 - `@mr/pg-admin` to spin up a PgAdmin docker container. Make sure to read it's [README](./packages/pg-admin/README.md) if you're going to use it.
 
 **SwipeScript**
+
 - `@mr-ss/database` which contains all database logic for SwipeScript
 - `@mr-ss/web` which contains the front-end Next.js project for SwipeScript
 
-> [!NOTE]
-> `mr` stands for MonoRepo<br>
-> `ss` stands for SwipeScript
+> [!NOTE] > `mr` stands for MonoRepo<br> > `ss` stands for SwipeScript
 
 ## Getting Started
 
-### **1. Clone the Repository** 
+### **1. Clone the Repository**
 
 ```
 git clone https://github.com/sjoerdvanbommel/monorepo.git
 cd monorepo
 ```
 
-### **2. Install Dependencies** 
+### **2. Install Dependencies**
 
 Using npm or yarn? This project uses pnpm workspaces, so make sure to install pnpm globally first:
 
@@ -42,7 +42,6 @@ Once pnpm is installed, run:
 ```
 pnpm i
 ```
-
 
 ### **3. Initialize Project Settings**
 
@@ -61,7 +60,7 @@ The setup script will first copy over all `.env.example` files to `.env` files i
 
 > [!NOTE]
 > If you run into compile errors in VS Code after this step, you might need to restart the TypeScript server:
-> 
+>
 > Open a TypeScript file and run `Ctrl/Cmd + Shift + P` -> `TypeScript: Restart TS Server`
 
 > [!NOTE]
@@ -80,6 +79,7 @@ This command will launch the development server for all projects inside of this 
 ```
 pnpm run lint
 ```
+
 Check your code for potential issues and maintain a consistent coding style using ESLint.
 
 ### **Build the Project**

@@ -1,5 +1,6 @@
 {
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "turbo run build",
     "db:migrate:dev": "turbo run db:migrate:dev",
@@ -8,7 +9,7 @@
     "db:seed": "turbo run db:seed",
     "db:generate": "turbo run db:generate",
     "dev": "turbo run dev",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format": "prettier --write .",
     "lint": "turbo run lint",
     "docker-compose": "turbo run docker-compose",
     "clean": "turbo run clean && rimraf .turbo node_modules dist",

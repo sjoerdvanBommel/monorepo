@@ -1,4 +1,4 @@
 packages:
-  - "packages/**/*"
-  - "!**/.next/**"
-  - "!**/dist/**"
+  - 'packages/**/*'
+  - '!**/.next/**'
+  - '!**/dist/**'
