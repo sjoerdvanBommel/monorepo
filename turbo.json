@@ -17,21 +17,24 @@
       "cache": false
     },
     "db:seed": {
-      "dependsOn": ["db:generate"],
+      "dependsOn": ["db:migrate:dev"],
       "cache": false
     },
     "dev": {
-      "dependsOn": ["db:push"],
       "cache": false,
       "persistent": true
     },
     "db:generate": {
+      "dependsOn": ["docker-compose"],
       "cache": false
     },
     "lint": {},
     "docker-compose": {
       "cache": false
     },
-    "clean": {}
+    "clean": {},
+    "setup": {
+      "dependsOn": ["db:seed"]
+    }
   }
 }

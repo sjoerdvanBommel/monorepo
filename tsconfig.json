@@ -1,0 +1,4 @@
+{
+    "extends": "@mr/tsconfig/node20.json",
+    "include": ["set-env-variables.ts"]
+}

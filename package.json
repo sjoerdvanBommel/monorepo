@@ -11,13 +11,14 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint": "turbo run lint",
     "docker-compose": "turbo run docker-compose",
-    "clean": "turbo run clean && rimraf .turbo node_modules dist"
+    "clean": "turbo run clean && rimraf .turbo node_modules dist",
+    "setup": "turbo run setup"
   },
   "devDependencies": {
     "prettier": "^3.0.3",
     "rimraf": "^5.0.5",
     "tsx": "^3.14.0",
-    "turbo": "latest"
+    "turbo": "^1.10.15"
   },
   "packageManager": "pnpm@8.6.12"
 }

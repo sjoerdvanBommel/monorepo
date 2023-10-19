@@ -1,5 +1,3 @@
-// If there's a compile error here, make sure to run `pnpm run db:generate` first, so the client gets generated
-// Still an error? Ctrl + Shift + P -> Restart TS Server
 import { prisma, type User } from "./client";
 
 const DEFAULT_USERS = [
