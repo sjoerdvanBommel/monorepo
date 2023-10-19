@@ -60,6 +60,9 @@ importers:
       '@mr/pg-admin':
         specifier: workspace:*
         version: link:../../pg-admin
+      '@mr/utils':
+        specifier: workspace:*
+        version: link:../../utils
       '@types/node':
         specifier: ^20.8.7
         version: 20.8.7
@@ -118,6 +121,12 @@ importers:
       typescript:
         specifier: ^5.2.2
         version: 5.2.2
+
+  packages/utils:
+    devDependencies:
+      '@mr/config':
+        specifier: workspace:*
+        version: link:../config
 
 packages:
 

@@ -1,0 +1,7 @@
+{
+  "extends": "@mr/config/tsconfig/node20.json",
+  "compilerOptions": {
+    "declaration": true
+  },
+  "include": ["**/*.ts"]
+}

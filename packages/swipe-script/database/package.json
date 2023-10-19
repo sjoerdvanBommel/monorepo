@@ -2,6 +2,7 @@
   "name": "@mr-ss/database",
   "version": "1.0.0",
   "license": "MIT",
+  "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -10,7 +11,7 @@
   ],
   "prisma": {
     "schema": "prisma/schema.prisma",
-    "seed": "tsx src/seed.ts"
+    "seed": "tsx src/seed/seed.ts"
   },
   "scripts": {
     "build": "tsup",
@@ -18,7 +19,7 @@
     "db:migrate:deploy": "prisma migrate deploy",
     "db:migrate:dev": "prisma migrate dev",
     "db:push": "prisma db push",
-    "db:seed": "tsx src/seed.ts",
+    "db:seed": "tsx src/seed/seed.ts",
     "db:generate": "prisma generate",
     "dev": "tsup --watch",
     "format": "prisma format",
@@ -32,6 +33,7 @@
   "devDependencies": {
     "@mr/config": "workspace:*",
     "@mr/pg-admin": "workspace:*",
+    "@mr/utils": "workspace:*",
     "@types/node": "^20.8.7",
     "eslint": "^8.51.0",
     "prisma": "^5.4.2",

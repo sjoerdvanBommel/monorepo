@@ -1,0 +1,11 @@
+{
+  "name": "@mr/utils",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "types": "types.ts",
+  "devDependencies": {
+    "@mr/config": "workspace:*"
+  },
+  "type": "module"
+}

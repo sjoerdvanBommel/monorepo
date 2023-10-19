@@ -1,9 +1,9 @@
-const { PrismaPlugin } = require('@prisma/nextjs-monorepo-workaround-plugin')
+import { PrismaPlugin } from '@prisma/nextjs-monorepo-workaround-plugin'
 
 /**
  * @type {import('next').NextConfig}
  */
-module.exports = {
+export default {
   webpack: (config, { isServer }) => {
     if (isServer) {
       config.externals.push('_http_common', 'encoding')

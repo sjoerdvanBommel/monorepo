@@ -1,19 +1,31 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-  referentialIntegrity = "prisma"
 }
 
 generator client {
   provider = "prisma-client-js"
-  previewFeatures = ["referentialIntegrity"]
 }
 
-model User {
-  id            String    @id @default(cuid())
-  email         String    @unique
-  name          String?
+model Question {
+  id           Int                 @id @default(autoincrement())
+  question_text         String
+  difficulty_level      Int
+  question_type_id      Int
+  question_type         QuestionType        @relation(fields: [question_type_id], references: [id])
+  answers               Answer[]
+}
+
+model QuestionType {
+  id      Int                 @id @default(autoincrement())
+  type_name             String
+  questions             Question[]
+}
+
+model Answer {
+  id             Int                 @id @default(autoincrement())
+  answer_text           String
+  is_correct            Boolean
+  question_id           Int
+  question              Question            @relation(fields: [question_id], references: [id])
 }

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "question_text": "0",
+    "difficulty_level": 3,
+    "question_type_id": 1
+  },
+  {
+    "id": 2,
+    "question_text": "''",
+    "difficulty_level": 2,
+    "question_type_id": 1
+  },
+  {
+    "id": 3,
+    "question_text": "null",
+    "difficulty_level": 4,
+    "question_type_id": 1
+  },
+  {
+    "id": 4,
+    "question_text": "true",
+    "difficulty_level": 1,
+    "question_type_id": 1
+  }
+]

@@ -2,10 +2,7 @@
   "private": true,
   "name": "@mr-ss/web",
   "version": "1.0.0",
-  "prisma": {
-    "schema": "@mr-ss/database/prisma/schema.prisma",
-    "seed": "tsx @mr-ss/database/src/seed.ts"
-  },
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
