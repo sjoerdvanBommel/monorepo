@@ -23,5 +23,5 @@ function copyEnvFiles(directory: string) {
   })
 }
 
-const currentDirectory = `${process.cwd()}/packages`
+const currentDirectory = process.cwd()
 copyEnvFiles(currentDirectory)

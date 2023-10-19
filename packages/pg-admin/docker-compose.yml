@@ -1,10 +1,11 @@
+# Include this docker-compose file in one of the packages that uses PostgreSQL to spin up PgAdmin
+
 version: '3'
 
 services:
   pgadmin:
     container_name: mr_pg-admin-container
     image: dpage/pgadmin4
-    restart: always
     env_file:
       - .env
     ports:

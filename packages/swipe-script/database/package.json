@@ -24,13 +24,14 @@
     "format": "prisma format",
     "lint": "eslint \"src/**/*.ts\"",
     "studio": "prisma studio",
-    "docker-compose": "docker compose up -d"
+    "docker-compose": "docker compose -f docker-compose.yml -f node_modules/@mr/pg-admin/docker-compose.yml up -d"
   },
   "dependencies": {
     "@prisma/client": "^5.4.2"
   },
   "devDependencies": {
     "@mr/config": "workspace:*",
+    "@mr/pg-admin": "workspace:*",
     "@types/node": "^20.8.7",
     "eslint": "^8.51.0",
     "prisma": "^5.4.2",

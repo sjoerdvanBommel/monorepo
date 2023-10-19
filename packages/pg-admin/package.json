@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "license": "MIT",
-  "scripts": {
-    "docker-compose": "docker compose up -d"
+  "devDependencies": {
+    "@mr/config": "workspace:*"
   }
 }
