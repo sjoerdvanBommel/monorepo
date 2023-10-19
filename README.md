@@ -36,7 +36,7 @@ pnpm i
 pnpm run setup
 ```
 
-The setup script will synchronously run the following scripts in all repos:
+The setup script will first copy over all `.env.example` files to `.env` files in the same directory. Next, it will synchronously run the following scripts in all repos:
 
 - `docker-compose` to make sure all docker containers are running
 - `db:generate` to generate the database clients
@@ -49,6 +49,9 @@ The setup script will synchronously run the following scripts in all repos:
 > If you run into compile errors in VS Code after this step, you might need to restart the TypeScript server:
 > 
 > Open a TypeScript file and run `Ctrl/Cmd + Shift + P` -> `TypeScript: Restart TS Server`
+
+> [!NOTE]
+> Turborepo has a [different approach](https://turbo.build/repo/docs/handbook/dev#using-environment-variables) of using environment variables in a monorepo, which increases coupling of the monorepo. They are currently working on a first-class solution, but until then the `.env.example` files will be copied over with a custom script.
 
 ### **4. Start the Development Server**
 

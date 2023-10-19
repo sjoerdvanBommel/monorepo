@@ -12,9 +12,11 @@
     "lint": "turbo run lint",
     "docker-compose": "turbo run docker-compose",
     "clean": "turbo run clean && rimraf .turbo node_modules dist",
-    "setup": "turbo run setup"
+    "setup:env": "tsx set-env-variables.ts",
+    "setup": "pnpm run setup:env && turbo run setup"
   },
   "devDependencies": {
+    "@mr/tsconfig": "workspace:^",
     "prettier": "^3.0.3",
     "rimraf": "^5.0.5",
     "tsx": "^3.14.0",
