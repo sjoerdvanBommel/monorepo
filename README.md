@@ -4,6 +4,21 @@
 
 Welcome to my monorepo! This README guide will walk you through the steps to get the project up and running. Before you begin, make sure you have [Docker](https://www.docker.com/products/docker-desktop/) and [Node.js](https://nodejs.org/en/download) v20+ installed on your system.
 
+### Current packages
+
+**General**
+- `@mr/config` for ESLint configuration
+- `@mr/tsconfig` for all tsconfig files to keep things consistent over different projects
+- `@mr/pg-admin` to spin up a PgAdmin docker container. Make sure to read it's [README](./packages/pg-admin/README.md) if you're going to use it.
+
+**SwipeScript**
+- `@mr-ss/database` which contains all database logic for SwipeScript
+- `@mr-ss/web` which contains the front-end Next.js project for SwipeScript
+
+> [!NOTE]
+> `mr` stands for MonoRepo<br>
+> `ss` stands for SwipeScript
+
 ## Getting Started
 
 ### **1. Clone the Repository** 

@@ -9,7 +9,7 @@ services:
     platform: linux/amd64
     image: postgres:16.0-alpine3.18
     restart: always
-    container_name: swipe-script-database
+    container_name: mr-ss_database-container
     ports:
       - 5432:5432
     env_file:

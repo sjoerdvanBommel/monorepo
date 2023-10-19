@@ -2,7 +2,7 @@ module.exports = {
   extends: ["next", "turbo", "prettier"],
   settings: {
     next: {
-      rootDir: ["apps/*/", "packages/*/"],
+      rootDir: ["packages/*/"],
     },
   },
   rules: {
