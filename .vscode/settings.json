@@ -2,5 +2,8 @@
   "typescript.tsserver.experimental.enableProjectDiagnostics": true,
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "javascript.suggestionActions.enabled": false
+  "javascript.suggestionActions.enabled": false,
+  "files.associations": {
+    "*.svg": "html"
+  }
 }

@@ -1,15 +1,9 @@
-import {
-  prisma,
-  type Answer,
-  type Question,
-  type QuestionType,
-} from '../client'
+import { prisma, type Answer, type Question } from '../client'
 import answersJson from './answers.json'
-import questionTypesJson from './question-types.json'
+import { questionTypes } from './question-types'
 import questionsJson from './questions.json'
 
 const questions: Question[] = questionsJson
-const questionTypes: QuestionType[] = questionTypesJson
 const answers: Answer[] = answersJson
 
 ;(async () => {

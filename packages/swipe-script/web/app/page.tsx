@@ -1,16 +1,16 @@
-import { prisma } from '@mr-ss/database'
+import { TRUTHY_OR_FALSY_QT_ID } from '@mr-ss/database'
+import { getQuestions } from '../backend/actions/get-questions'
+import { SwipeScript } from '../components/swipe-script'
 
 export default async function IndexPage() {
-  const questions = await prisma.question.findMany()
-  const questionTypes = await prisma.questionType.findMany()
-  const answers = await prisma.answer.findMany()
+  const initialQuestions = await getQuestions({
+    questionTypeId: TRUTHY_OR_FALSY_QT_ID,
+    strategyData: { strategy: 'start' },
+  })
 
   return (
-    <div>
-      <h1>Hello World</h1>
-      <pre>{JSON.stringify(questions, null, 2)}</pre>
-      <pre>{JSON.stringify(questionTypes, null, 2)}</pre>
-      <pre>{JSON.stringify(answers, null, 2)}</pre>
-    </div>
+    <>
+      <SwipeScript initialQuestions={initialQuestions} />
+    </>
   )
 }
