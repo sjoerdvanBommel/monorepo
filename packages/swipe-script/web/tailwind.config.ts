@@ -23,6 +23,11 @@ const config: Config = {
         'appear-float-random':
           'float-random 40s ease-in-out infinite, appear 2s cubic-bezier(.17,.67,.28,1.01) forwards',
         appear: 'appear 2s cubic-bezier(.17,.67,.28,1.01) forwards',
+        'shrink-away-bottom': 'shrink-away-bottom 1s ease-in forwards',
+        'fade-down': 'fade-down .5s cubic-bezier(.57,-0.42,.83,.67) forwards',
+        'fade-up': 'fade-up .5s cubic-bezier(.51,-0.25,.83,.67) forwards',
+        'fade-left': 'fade-left .5s cubic-bezier(.51,-0.25,.83,.67) forwards',
+        'fade-right': 'fade-right .5s cubic-bezier(.51,-0.25,.83,.67) forwards',
       },
 
       fontFamily: {
@@ -33,10 +38,14 @@ const config: Config = {
     },
     colors: {
       transparent: 'transparent',
-      'black-accent': 'var(--black-accent)',
-      primary: '#fff717',
-      secondary: '#ff1572',
-      typescript: '#4479C3',
+      'black-accent': 'rgb(var(--black-accent) / <alpha-value>)',
+      'light-accent': 'rgb(var(--light-accent) / <alpha-value>)',
+      primary: 'rgb(var(--primary) / <alpha-value>)',
+      secondary: 'rgb(var(--secondary) / <alpha-value>)',
+      success: 'rgb(var(--success) / <alpha-value>)',
+      error: 'rgb(var(--error) / <alpha-value>)',
+
+      terminal: 'rgb(var(--terminal) / <alpha-value>)',
     },
   },
   plugins: [

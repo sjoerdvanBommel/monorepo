@@ -13,7 +13,7 @@
   },
   {
     "id": 3,
-    "question_text": "null",
+    "question_text": "null == false",
     "difficulty_level": 4,
     "question_type_id": 1
   },

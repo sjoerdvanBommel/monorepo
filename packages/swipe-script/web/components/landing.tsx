@@ -1,58 +1,88 @@
 import Image from 'next/image'
+import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+import { twMerge } from 'tailwind-merge'
 
-interface Props {
-  onStart: () => void
-}
+export const Landing = () => {
+  const searchParams = useSearchParams()
+  const started = searchParams.has('started')
 
-export const Landing = ({ onStart }: Props) => {
   return (
     <div className="w-full min-h-full overflow-hidden relative">
-      <div className="absolute w-full animate-appear-float flex justify-center mt-28 md:mt-36 lg:mt-48 xl:mt-80 blur-3xl">
-        <div className="scale-150 md:scale-[2] lg:scale-[2.5] xl:scale-[3]">
-          <div className="relative aspect-square bg-gradient-conic from-primary from-20% to-secondary animate-background transition-all opacity-20 bg-blend-darken w-96 h-96" />
-        </div>
+      <div
+        className={twMerge(
+          'flex flex-col justify-center text-center mt-12 sm:mt-16 lg:mt-20',
+          started && 'animate-fade-up animation-duration-500',
+        )}
+      >
+        <span className="text-6xl animate-appear font-heading">Swipe</span>
+        <span className="text-5xl animate-appear font-heading">Script</span>
       </div>
 
-      <span className="block font-heading text-6xl text-center mt-20 animate-appear">
-        Swipe
-      </span>
-      <span className="block font-heading text-5xl text-center animate-appear">
-        Script
-      </span>
-
-      <span className="block text-2xl mt-20 text-center animate-appear opacity-0 animation-delay-500 animation-duration-[1.5s]">
+      <span
+        className={twMerge(
+          'block text-2xl mt-12 sm:mt-16 lg:mt-20 text-center',
+          !started &&
+            'opacity-0 animate-appear animation-delay-500 animation-duration-[1.5s]',
+          started &&
+            'animate-fade-left animation-delay-0 animation-duration-500',
+        )}
+      >
         Learn JavaScript
       </span>
-      <strong className="block text-center text-4xl opacity-0 animate-appear bg-gradient-to-br from-primary from-20% to-secondary bg-clip-text text-transparent animation-delay-1000 animation-duration-[1.5s]">
+      <strong
+        className={twMerge(
+          'block text-center text-4xl bg-gradient-to-br from-primary from-20% to-secondary bg-clip-text text-transparent',
+          !started &&
+            'opacity-0 animate-appear animation-delay-1000 animation-duration-[1.5s]',
+          started &&
+            'animate-fade-right animation-delay-0 animation-duration-500',
+        )}
+      >
         the fun way
       </strong>
 
-      <div className="absolute left-4 right-0 bottom-60 opacity-0 animate-appear-float-random animation-delay-1000">
-        <Image
-          src={'/fire.png'}
-          alt={'Fire emoji'}
-          width={160}
-          height={160}
-          className="mx-auto left-0 right-0 absolute scale-[0.85] blur-xl"
-        />
-        <Image
-          src={'/fire.png'}
-          alt={'Fire emoji'}
-          width={160}
-          height={160}
-          className="mx-auto"
-        />
+      <div
+        className={twMerge(
+          'absolute left-4 right-0 bottom-40 lg:bottom-60 transition-all duration-500',
+          started && 'scale-0',
+        )}
+      >
+        <div className="opacity-0 animate-appear-float-random animation-delay-1000">
+          <Image
+            src={'/fire.png'}
+            alt={'Fire emoji'}
+            width={160}
+            height={160}
+            className="mx-auto left-0 right-0 absolute scale-[0.85] blur-xl"
+          />
+          <Image
+            src={'/fire.png'}
+            alt={'Fire emoji'}
+            width={160}
+            height={160}
+            className="mx-auto"
+          />
+        </div>
       </div>
 
-      <div className="absolute bottom-0 w-full p-4 animate-appear opacity-0 animation-delay-1000 animation-duration-[1.5s] overflow-hidden">
-        <button
-          className="bg-gradient-to-br from-primary to-secondary rounded-xl w-full p-0.5"
-          onClick={onStart}
+      <div
+        className={twMerge(
+          'absolute bottom-0 w-full p-4 overflow-hidden',
+          !started &&
+            'animate-appear animation-delay-1000 animation-duration-[1.5s] opacity-0',
+          started && 'animate-fade-down',
+        )}
+      >
+        <Link
+          className="block text-center bg-gradient-to-br from-primary to-secondary rounded-xl w-full p-0.5"
+          href={'/?started'}
+          shallow
         >
           <strong className="block tracking-wide bg-black-accent rounded-[inherit] px-4 py-3 text-xl">
             Let's give it a try!
           </strong>
-        </button>
+        </Link>
       </div>
     </div>
   )

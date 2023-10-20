@@ -17,7 +17,7 @@
       "cache": false
     },
     "db:seed": {
-      "dependsOn": ["db:migrate:dev"],
+      "dependsOn": ["db:push"],
       "cache": false
     },
     "dev": {

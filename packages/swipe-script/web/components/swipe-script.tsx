@@ -1,36 +1,40 @@
 'use client'
 
 import type { Question } from '@mr-ss/database'
-import { useState } from 'react'
+import { motion } from 'framer'
+import { useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { Landing } from './landing'
+import { SwipeCard } from './swipe-card'
 
 interface Props {
   initialQuestions: Question[]
 }
 
 export const SwipeScript = ({ initialQuestions }: Props) => {
-  const [isTransitioningPage, setIsTransitioningPage] = useState(false)
-  const [started, setStarted] = useState(false)
+  const searchParams = useSearchParams()
+  const started = searchParams.has('started')
+  const [showQuestions, setShowQuestions] = useState(false)
 
-  function onStart() {
-    setIsTransitioningPage(true)
+  useEffect(() => {
+    if (started) {
+      setTimeout(() => {
+        setShowQuestions(true)
+      }, 500)
+    } else {
+      setShowQuestions(false)
+    }
+  }, [started])
 
-    setTimeout(() => {
-      setStarted(true)
-    }, 1000)
-
-    setTimeout(() => {
-      setIsTransitioningPage(false)
-    }, 2000)
+  if (showQuestions) {
+    return (
+      <motion.div className="w-full h-full flex justify-center items-center">
+        {initialQuestions.map((question) => (
+          <SwipeCard key={question.id} question={question} />
+        ))}
+      </motion.div>
+    )
   }
 
-  return (
-    <>
-      {!started ? (
-        <Landing onStart={onStart} />
-      ) : (
-        <p>GAME with initial questions: {JSON.stringify(initialQuestions)}</p>
-      )}
-    </>
-  )
+  return <Landing />
 }

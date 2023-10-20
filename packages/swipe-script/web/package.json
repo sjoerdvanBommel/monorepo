@@ -10,16 +10,18 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@prisma/nextjs-monorepo-workaround-plugin": "^5.4.2",
+    "framer": "^2.4.1",
     "next": "^13.5.5",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "tailwind-merge": "^1.14.0"
   },
   "devDependencies": {
     "@mr-ss/database": "workspace:*",
     "@mr/config": "workspace:*",
     "@mr/utils": "workspace:^",
     "@prettier/plugin-xml": "^3.2.1",
+    "@prisma/nextjs-monorepo-workaround-plugin": "^5.4.2",
     "@types/node": "^20.8.7",
     "@types/react": "^18.2.29",
     "@types/react-dom": "^18.2.13",

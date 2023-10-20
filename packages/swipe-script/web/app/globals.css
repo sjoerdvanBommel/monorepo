@@ -18,7 +18,74 @@ h6 {
 }
 
 :root {
-  --black-accent: #09090b;
+  --black-accent: 9 9 11;
+  --light-accent: 240 240 242;
+  --success: 15 131 7;
+  --error: 175 8 36;
+  --primary: 255 247 23;
+  --secondary: 255 21 114;
+
+  --terminal: 225 225 225;
+}
+
+@keyframes fade-down {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+}
+
+@keyframes fade-up {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-250px);
+  }
+}
+
+@keyframes fade-left {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-300px);
+  }
+}
+
+@keyframes fade-right {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(300px);
+  }
+}
+
+@keyframes shrink-away-bottom {
+  0% {
+    transform-origin: bottom center;
+    scale: 1;
+  }
+
+  100% {
+    transform-origin: bottom center;
+    scale: 0;
+  }
 }
 
 @keyframes rotate {
