@@ -12,11 +12,19 @@ import { Terminal } from './terminal/terminal'
 
 interface Props {
   question: Question
+  onSwipeLeft?: (questionId: Question['id']) => void
+  onSwipeRight?: (questionId: Question['id']) => void
+  startTyping?: boolean
 }
 
 const swipeAwayTimeMs = 750
 
-export const SwipeCard = ({ question }: Props) => {
+export const SwipeCard = ({
+  question,
+  startTyping = false,
+  onSwipeLeft,
+  onSwipeRight,
+}: Props) => {
   const x = useMotionValue(0)
   const successX = useTransform(x, [0, 100], [0, 1])
   const errorX = useTransform(x, [-100, 0], [1, 0])
@@ -30,19 +38,21 @@ export const SwipeCard = ({ question }: Props) => {
   const errorScaleX = useSpring(errorX, options)
   const controls = useAnimation()
 
-  const onDragEnd: DragHandlers['onDragEnd'] = (_, info) => {
+  const onDragEnd: DragHandlers['onDragEnd'] = async (_, info) => {
     const transition = { duration: swipeAwayTimeMs / 1000 }
 
     if (isSwipingLeft(info, x.get())) {
-      controls.start({ x: '-100vw', transition })
+      await controls.start({ x: '-100vw', transition })
+      onSwipeLeft?.(question.id)
     } else if (isSwipingRight(info, x.get())) {
-      controls.start({ x: '100vw', transition })
+      await controls.start({ x: '100vw', transition })
+      onSwipeRight?.(question.id)
     }
   }
 
   return (
     <motion.div
-      className="w-80 h-60 rounded-lg shadow-lg shadow-light-accent/[8%] bg-light-accent/5 overflow-hidden backdrop-blur-xl"
+      className="absolute w-80 h-60 rounded-lg shadow-lg shadow-light-accent/[8%] bg-light-accent/5 overflow-hidden backdrop-blur-xl"
       drag="x"
       onDragEnd={onDragEnd}
       dragSnapToOrigin
@@ -53,6 +63,7 @@ export const SwipeCard = ({ question }: Props) => {
         lineData={[
           { type: 'input', prompt: '>', value: question.question_text },
         ]}
+        startTyping={startTyping}
       />
       <motion.div
         style={{ scaleX: successScaleX }}

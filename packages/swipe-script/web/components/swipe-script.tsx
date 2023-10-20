@@ -15,6 +15,8 @@ export const SwipeScript = ({ initialQuestions }: Props) => {
   const searchParams = useSearchParams()
   const started = searchParams.has('started')
   const [showQuestions, setShowQuestions] = useState(false)
+  const [questions, setQuestions] = useState(initialQuestions)
+  const [visibleCardIndex, setVisibleCardIndex] = useState(0)
 
   useEffect(() => {
     if (started) {
@@ -26,12 +28,32 @@ export const SwipeScript = ({ initialQuestions }: Props) => {
     }
   }, [started])
 
+  function onSwipeLeft() {
+    setVisibleCardIndex((prevIndex) =>
+      Math.min(prevIndex + 1, questions.length - 1),
+    )
+  }
+
+  function onSwipeRight() {
+    setVisibleCardIndex((prevIndex) =>
+      Math.min(prevIndex + 1, questions.length - 1),
+    )
+  }
+
   if (showQuestions) {
     return (
-      <motion.div className="w-full h-full flex justify-center items-center">
-        {initialQuestions.map((question) => (
-          <SwipeCard key={question.id} question={question} />
-        ))}
+      <motion.div className="w-full h-full flex justify-center items-center relative">
+        {questions
+          .slice(visibleCardIndex, visibleCardIndex + 3)
+          .map((question, index) => (
+            <SwipeCard
+              key={question.id}
+              question={question}
+              startTyping={index === 2}
+              onSwipeLeft={onSwipeLeft}
+              onSwipeRight={onSwipeRight}
+            />
+          ))}
       </motion.div>
     )
   }

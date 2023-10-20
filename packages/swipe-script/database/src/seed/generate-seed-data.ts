@@ -1,28 +1,38 @@
-import fs from 'fs'
-import { Answer, Question, TRUTHY_OR_FALSY_QT_ID } from '../client'
+import {
+  Answer,
+  Question,
+  QuestionType,
+  TRUTHY_OR_FALSY_QT_ID,
+} from '../client'
 
 interface Situation {
-  value: any
   label: string
+  difficulty_level: number
 }
 
 const situations: Situation[] = [
-  { label: 'true', value: true },
-  { label: 'false', value: false },
-  { label: '0', value: 0 },
-  { label: "''", value: '' },
-  { label: 'null', value: null },
-  { label: 'undefined', value: undefined },
-  { label: 'NaN', value: NaN },
-  { label: 'Infinity', value: Infinity },
-  { label: '[]', value: [] },
-  { label: '{}', value: {} },
+  { label: 'true', difficulty_level: 1 },
+  { label: 'false', difficulty_level: 1 },
+  { label: '0', difficulty_level: 2 },
+  { label: "''", difficulty_level: 3 },
+  { label: 'null', difficulty_level: 2 },
+  { label: 'undefined', difficulty_level: 2 },
+  { label: 'NaN', difficulty_level: 4 },
+  { label: 'Infinity', difficulty_level: 4 },
+  { label: '[]', difficulty_level: 3 },
+  { label: '{}', difficulty_level: 3 },
+  { label: 'Symbol()', difficulty_level: 4 },
+  { label: "Symbol('foo')", difficulty_level: 4 },
 ]
 
-const answersJsonFileUrl = './answers.json'
-const questionsJsonFileUrl = './questions.json'
+export const questionTypes: readonly QuestionType[] = [
+  {
+    id: 1,
+    type_name: 'Truthy or Falsy?',
+  },
+] as const
 
-const generateSeedData = async () => {
+export const generateSeedData = async () => {
   const questions: Question[] = []
   const answers: Answer[] = []
 
@@ -31,7 +41,13 @@ const generateSeedData = async () => {
 
   situations.forEach((situation1) => {
     situations.forEach((situation2) => {
-      const question1Text = `${situation1.label} == ${situation2.label}`
+      const question1Text = `(${situation1.label} == ${situation2.label})`
+
+      let difficultyLevel = Math.round(
+        (situation1.difficulty_level + situation2.difficulty_level) / 2,
+      )
+
+      if (situation1.label === situation2.label) difficultyLevel = 1
 
       answers.push(
         {
@@ -51,11 +67,11 @@ const generateSeedData = async () => {
       questions.push({
         id: questionId++,
         question_text: question1Text,
-        difficulty_level: 4,
+        difficulty_level: difficultyLevel,
         question_type_id: TRUTHY_OR_FALSY_QT_ID,
       })
 
-      const question2Text = `${situation1.label} == ${situation2.label}`
+      const question2Text = `(${situation1.label} === ${situation2.label})`
 
       answers.push(
         {
@@ -75,17 +91,15 @@ const generateSeedData = async () => {
       questions.push({
         id: questionId++,
         question_text: question2Text,
-        difficulty_level: 4,
+        difficulty_level: difficultyLevel,
         question_type_id: TRUTHY_OR_FALSY_QT_ID,
       })
     })
   })
 
-  fs.rmSync(answersJsonFileUrl, { force: true })
-  fs.rmSync(questionsJsonFileUrl, { force: true })
-
-  fs.writeFileSync(answersJsonFileUrl, JSON.stringify(answers))
-  fs.writeFileSync(questionsJsonFileUrl, JSON.stringify(questions))
+  return {
+    answers,
+    questions,
+    questionTypes,
+  }
 }
-
-generateSeedData()

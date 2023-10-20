@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client'
-import { questionTypes } from './seed/question-types'
+import { questionTypes } from './seed/generate-seed-data'
 
 declare global {
   var prisma: PrismaClient | undefined

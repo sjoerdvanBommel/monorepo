@@ -37,7 +37,7 @@ interface Props {
   /** Character to use for cursor, defaults to ▋ */
   cursor?: string
   /** Don't initialise the animation */
-  noInit?: boolean
+  startTyping?: boolean
 }
 
 export const Terminal = ({
@@ -49,15 +49,17 @@ export const Terminal = ({
   progressPercent = 100,
   progressChar = '█',
   cursor = '▋',
-  noInit = false,
+  startTyping = false,
   lineData,
 }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const container = containerRef.current
+    if (!container) return
 
-    if (noInit || !container) return
+    const isAlreadyInitialized = container.hasAttribute('data-termynal')
+    if (isAlreadyInitialized || !startTyping) return
 
     function lineDataToElements() {
       return lineData.map((line) => {
@@ -158,13 +160,11 @@ export const Terminal = ({
       }
     }
 
-    if (!container.hasAttribute('data-termynal')) {
-      container.setAttribute('data-termynal', '')
-      container.innerHTML = ''
+    container.setAttribute('data-termynal', '')
+    container.innerHTML = ''
 
-      start()
-    }
-  }, [])
+    start()
+  }, [lineData])
 
   return <div ref={containerRef} />
 }

@@ -1,13 +1,10 @@
-import { prisma, type Answer, type Question } from '../client'
-import answersJson from './answers.json'
-import { questionTypes } from './question-types'
-import questionsJson from './questions.json'
-
-const questions: Question[] = questionsJson
-const answers: Answer[] = answersJson
+import { prisma } from '../client'
+import { generateSeedData } from './generate-seed-data'
 
 ;(async () => {
   try {
+    const { questions, answers, questionTypes } = await generateSeedData()
+
     await Promise.all(
       questionTypes.map((questionType) =>
         prisma.questionType.upsert({
