@@ -1,5 +1,7 @@
 import { Metadata } from 'next'
 import { Fredoka, Titan_One } from 'next/font/google'
+import localFont from 'next/font/local'
+import { Background } from '../components/background'
 import './globals.css'
 
 const titanOne = Titan_One({
@@ -7,7 +9,10 @@ const titanOne = Titan_One({
   variable: '--font-heading',
   subsets: ['latin'],
 })
+
 const fredoka = Fredoka({ variable: '--font-paragraph', subsets: ['latin'] })
+
+const consolas = localFont({ src: './consolas.ttf', variable: '--font-code' })
 
 export const metadata: Metadata = {
   title: 'Swipe Script',
@@ -25,14 +30,10 @@ export default function RootLayout({
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </head>
       <body
-        className={`w-full h-full ${titanOne.variable} ${fredoka.variable}`}
+        className={`w-full h-full ${titanOne.variable} ${fredoka.variable} ${consolas.variable}`}
       >
         <div className="w-full h-full relative overflow-hidden">
-          <div className="absolute -z-50 w-full animate-appear-float flex justify-center mt-28 md:mt-36 lg:mt-48 xl:mt-80 blur-3xl">
-            <div className="scale-150 md:scale-[2] lg:scale-[2.5] xl:scale-[3]">
-              <div className="relative aspect-square bg-gradient-conic from-primary from-20% to-secondary animate-background transition-all opacity-20 bg-blend-darken w-96 h-96" />
-            </div>
-          </div>
+          <Background />
           {children}
         </div>
       </body>

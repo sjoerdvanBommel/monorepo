@@ -34,12 +34,17 @@ const config: Config = {
         sans: ['var(--font-paragraph)'],
         heading: ['var(--font-heading)'],
         paragraph: ['var(--font-paragraph)'],
+        code: ['var(--font-code)'],
+      },
+
+      dropShadow: {
+        white: '0 4px 6px rgb(var(--white-accent) / 0.15)',
       },
     },
     colors: {
       transparent: 'transparent',
       'black-accent': 'rgb(var(--black-accent) / <alpha-value>)',
-      'light-accent': 'rgb(var(--light-accent) / <alpha-value>)',
+      'white-accent': 'rgb(var(--white-accent) / <alpha-value>)',
       primary: 'rgb(var(--primary) / <alpha-value>)',
       secondary: 'rgb(var(--secondary) / <alpha-value>)',
       success: 'rgb(var(--success) / <alpha-value>)',

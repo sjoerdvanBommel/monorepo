@@ -15,8 +15,12 @@ export const Landing = () => {
           started && 'animate-fade-up animation-duration-500',
         )}
       >
-        <span className="text-6xl animate-appear font-heading">Swipe</span>
-        <span className="text-5xl animate-appear font-heading">Script</span>
+        <span className="text-6xl animate-appear font-heading drop-shadow-white">
+          Swipe
+        </span>
+        <span className="text-5xl animate-appear font-heading drop-shadow-white">
+          Script
+        </span>
       </div>
 
       <span

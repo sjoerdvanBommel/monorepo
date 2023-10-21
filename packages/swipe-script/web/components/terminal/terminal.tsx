@@ -42,9 +42,9 @@ interface Props {
 
 export const Terminal = ({
   dataAttributePrefix = 'data-ty',
-  startDelay = 600,
-  typeDelay = 90,
-  lineDelay = 1500,
+  startDelay = 300,
+  typeDelay = 30,
+  lineDelay = 800,
   progressLength = 40,
   progressPercent = 100,
   progressChar = '█',
@@ -166,5 +166,5 @@ export const Terminal = ({
     start()
   }, [lineData])
 
-  return <div ref={containerRef} />
+  return <div className="font-code opacity-0" ref={containerRef} />
 }

@@ -2,9 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  @apply text-white-accent;
+}
+
 * {
   @apply font-paragraph;
-  color: white;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -17,9 +21,13 @@ h6 {
   @apply font-heading;
 }
 
+svg {
+  fill: currentColor;
+}
+
 :root {
   --black-accent: 9 9 11;
-  --light-accent: 240 240 242;
+  --white-accent: 240 240 242;
   --success: 15 131 7;
   --error: 175 8 36;
   --primary: 255 247 23;

@@ -5,6 +5,7 @@ import { motion } from 'framer'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { Landing } from './landing'
+import { TruthyOrFalsy } from './question-headers/truthy-or-falsy'
 import { SwipeCard } from './swipe-card'
 
 interface Props {
@@ -42,19 +43,22 @@ export const SwipeScript = ({ initialQuestions }: Props) => {
 
   if (showQuestions) {
     return (
-      <motion.div className="w-full h-full flex justify-center items-center relative">
-        {questions
-          .slice(visibleCardIndex, visibleCardIndex + 3)
-          .map((question, index) => (
-            <SwipeCard
-              key={question.id}
-              question={question}
-              startTyping={index === 2}
-              onSwipeLeft={onSwipeLeft}
-              onSwipeRight={onSwipeRight}
-            />
-          ))}
-      </motion.div>
+      <>
+        <TruthyOrFalsy />
+        <motion.div className="w-full h-full flex justify-center items-center relative">
+          {questions
+            .slice(visibleCardIndex, visibleCardIndex + 1)
+            .map((question) => (
+              <SwipeCard
+                key={question.id}
+                question={question}
+                startTyping
+                onSwipeLeft={onSwipeLeft}
+                onSwipeRight={onSwipeRight}
+              />
+            ))}
+        </motion.div>
+      </>
     )
   }
 

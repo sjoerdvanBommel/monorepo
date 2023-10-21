@@ -5,10 +5,7 @@ import {
   motion,
   useAnimation,
   useMotionValue,
-  useSpring,
-  useTransform,
 } from 'framer'
-import { Terminal } from './terminal/terminal'
 
 interface Props {
   question: Question
@@ -26,16 +23,9 @@ export const SwipeCard = ({
   onSwipeRight,
 }: Props) => {
   const x = useMotionValue(0)
-  const successX = useTransform(x, [0, 100], [0, 1])
-  const errorX = useTransform(x, [-100, 0], [1, 0])
-  const options = {
-    stiffness: 200,
-    damping: 30,
-    restDelta: 0.03,
-  }
 
-  const successScaleX = useSpring(successX, options)
-  const errorScaleX = useSpring(errorX, options)
+  const fontSize = `${Math.min(2 / (question.question_text.length / 15), 2)}em`
+
   const controls = useAnimation()
 
   const onDragEnd: DragHandlers['onDragEnd'] = async (_, info) => {
@@ -52,27 +42,25 @@ export const SwipeCard = ({
 
   return (
     <motion.div
-      className="absolute w-80 h-60 rounded-lg shadow-lg shadow-light-accent/[8%] bg-light-accent/5 overflow-hidden backdrop-blur-xl"
+      className="absolute w-full h-full"
       drag="x"
       onDragEnd={onDragEnd}
       dragSnapToOrigin
       style={{ x }}
       animate={controls}
     >
-      <Terminal
-        lineData={[
-          { type: 'input', prompt: '>', value: question.question_text },
-        ]}
-        startTyping={startTyping}
-      />
       <motion.div
-        style={{ scaleX: successScaleX }}
-        className="h-2 absolute bottom-0 left-0 right-0 origin-left bg-success"
-      ></motion.div>
-      <motion.div
-        style={{ scaleX: errorScaleX }}
-        className="h-2 absolute bottom-0 left-0 right-0 origin-right bg-error"
-      ></motion.div>
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          duration: 0.5,
+          ease: [0, 0.71, 0.2, 1.01],
+        }}
+        className="text-center font-code mt-20"
+        style={{ fontSize }}
+      >
+        {question.question_text}
+      </motion.div>
     </motion.div>
   )
 }

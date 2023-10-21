@@ -41,7 +41,7 @@ export const generateSeedData = async () => {
 
   situations.forEach((situation1) => {
     situations.forEach((situation2) => {
-      const question1Text = `(${situation1.label} == ${situation2.label})`
+      const question1Text = `${situation1.label} == ${situation2.label}`
 
       let difficultyLevel = Math.round(
         (situation1.difficulty_level + situation2.difficulty_level) / 2,
@@ -52,13 +52,13 @@ export const generateSeedData = async () => {
       answers.push(
         {
           id: answerId++,
-          is_correct: !!eval(question1Text),
+          is_correct: !!eval(`(${question1Text})`),
           answer_text: 'Truthy',
           question_id: questionId,
         },
         {
           id: answerId++,
-          is_correct: !eval(question1Text),
+          is_correct: !eval(`(${question1Text})`),
           answer_text: 'Falsy',
           question_id: questionId,
         },
@@ -76,13 +76,13 @@ export const generateSeedData = async () => {
       answers.push(
         {
           id: answerId++,
-          is_correct: !!eval(question2Text),
+          is_correct: !!eval(`(${question2Text})`),
           answer_text: 'Truthy',
           question_id: questionId,
         },
         {
           id: answerId++,
-          is_correct: !eval(question2Text),
+          is_correct: !eval(`(${question2Text})`),
           answer_text: 'Falsy',
           question_id: questionId,
         },

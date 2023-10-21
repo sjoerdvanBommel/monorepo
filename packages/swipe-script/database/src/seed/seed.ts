@@ -1,9 +1,12 @@
 import { prisma } from '../client'
 import { generateSeedData } from './generate-seed-data'
-
 ;(async () => {
   try {
     const { questions, answers, questionTypes } = await generateSeedData()
+
+    await prisma.answer.deleteMany()
+    await prisma.question.deleteMany()
+    await prisma.questionType.deleteMany()
 
     await Promise.all(
       questionTypes.map((questionType) =>
