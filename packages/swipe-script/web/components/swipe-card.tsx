@@ -56,7 +56,7 @@ export const SwipeCard = ({
           duration: 0.5,
           ease: [0, 0.71, 0.2, 1.01],
         }}
-        className="text-center font-code mt-20"
+        className="text-center font-semibold font-code mt-20"
         style={{ fontSize }}
       >
         {question.question_text}

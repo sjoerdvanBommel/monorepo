@@ -1,0 +1,54 @@
+name: Deploy Monorepo
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy_staging:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 8
+
+      - name: Deploy @mr-ss/database
+        working-directory: packages/swipe-script/database
+        run: pnpm run docker-compose:no-admin
+
+      - name: Apply latest database migrations
+        run: |
+          pnpm run db:generate
+          pnpm run db:migrate:deploy
+
+      - name: Deploy @mr-ss/web
+        working-directory: packages/swipe-script/web
+        run: |
+          pnpm install -g vercel
+          vercel -t ${{ secrets.VERCEL_TOKEN }}
+
+  # deploy_production:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
+
+  #     - name: Deploy @mr-ss/database
+  #       working-directory: packages/swipe-script/database
+  #       run: pnpm run docker-compose
+
+  #     - name: Deploy @mr-ss/web
+  #       working-directory: packages/swipe-script/web
+  #       run: |
+  #         pnpm install -g vercel
+  #         vercel -t ${{ secrets.VERCEL_TOKEN }} --prod
