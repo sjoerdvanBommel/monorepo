@@ -20,6 +20,12 @@ export const SwipeScript = ({ initialQuestions }: Props) => {
   const [visibleCardIndex, setVisibleCardIndex] = useState(0)
 
   useEffect(() => {
+    fetch('/api')
+      .then((x) => x.json())
+      .then((result) => setQuestions(result))
+  }, [])
+
+  useEffect(() => {
     if (started) {
       setTimeout(() => {
         setShowQuestions(true)
