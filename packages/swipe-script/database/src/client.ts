@@ -9,7 +9,7 @@ export const prisma = global.prisma || new PrismaClient()
 
 if (process.env.NODE_ENV !== 'production') global.prisma = prisma
 
-// export * from '@prisma/client'
+export * from '@prisma/client'
 
 /** The ID of the `Truthy or Falsy?` question type based on the seed data */
 export const TRUTHY_OR_FALSY_QT_ID = questionTypes.find(
