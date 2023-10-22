@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - staging
 
 jobs:
   deploy_staging:
@@ -35,19 +36,3 @@ jobs:
           pnpm run db:seed
         env:
           DATABASE_URL: postgresql://${{ vars.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@${{ vars.POSTGRES_HOST }}:${{ vars.POSTGRES_PORT }}/${{ vars.POSTGRES_DB }}
-
-  # deploy_production:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v2
-
-  #     - name: Deploy @mr-ss/database
-  #       working-directory: packages/swipe-script/database
-  #       run: pnpm run docker-compose
-
-  #     - name: Deploy @mr-ss/web
-  #       working-directory: packages/swipe-script/web
-  #       run: |
-  #         pnpm install -g vercel
-  #         vercel -t ${{ secrets.VERCEL_API_TOKEN }} --prod
