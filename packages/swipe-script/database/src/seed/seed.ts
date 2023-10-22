@@ -2,6 +2,10 @@ import { prisma } from '../client'
 import { generateSeedData } from './generate-seed-data'
 ;(async () => {
   try {
+    const isSeeded = (await prisma.questionType.count()) > 0
+
+    if (isSeeded) return
+
     const { questions, answers, questionTypes } = await generateSeedData()
 
     await prisma.answer.deleteMany()

@@ -30,6 +30,12 @@ jobs:
         env:
           DATABASE_URL: postgresql://${{ vars.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@${{ vars.POSTGRES_HOST }}:${{ vars.POSTGRES_PORT }}/${{ vars.POSTGRES_DB }}
 
+      - name: Seed database
+        run: |
+          pnpm run db:seed
+        env:
+          DATABASE_URL: postgresql://${{ vars.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@${{ vars.POSTGRES_HOST }}:${{ vars.POSTGRES_PORT }}/${{ vars.POSTGRES_DB }}
+
   # deploy_production:
   #   runs-on: ubuntu-latest
   #   steps:

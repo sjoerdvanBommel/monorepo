@@ -17,7 +17,6 @@
       "cache": false
     },
     "db:seed": {
-      "dependsOn": ["db:push"],
       "cache": false
     },
     "dev": {
@@ -33,7 +32,7 @@
     },
     "clean": {},
     "setup": {
-      "dependsOn": ["docker-compose", "db:seed"]
+      "dependsOn": ["docker-compose", "db:push", "db:seed"]
     }
   }
 }
