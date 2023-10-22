@@ -77,16 +77,6 @@ resource "aws_db_instance" "mr-ss-db-instance" {
   skip_final_snapshot    = true
 }
 
-# resource "postgresql_role" "user_name" {
-#   name                = var.POSTGRES_USERNAME
-#   login               = true
-#   password            = var.POSTGRES_USER_PASSWORD
-#   encrypted_password  = true
-#   create_database     = true
-#   create_role         = true
-#   skip_reassign_owned = true
-# }
-
 resource "vercel_project" "mr-ss_web" {
   name      = "swipe-script"
   framework = "nextjs"
@@ -96,4 +86,16 @@ resource "vercel_project" "mr-ss_web" {
   }
   root_directory = "packages/swipe-script/web"
   install_command = "pnpm i"
+  serverless_function_region = "lhr1"
+  environment = [{
+    key        = "DATABASE_URL"
+    value      = "postgresql://${var.POSTGRES_USERNAME}:${var.POSTGRES_DB_PASSWORD}@${aws_db_instance.mr-ss-db-instance.endpoint}/${var.POSTGRES_DB_NAME}"
+    target     = ["preview"]
+  }]
+}
+
+resource "vercel_project_domain" "mr-ss_web-staging-domain" {
+  project_id = vercel_project.mr-ss_web.id
+  domain     = "swipe-script-staging.vercel.app"
+  git_branch = "staging"
 }
