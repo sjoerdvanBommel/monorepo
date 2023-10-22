@@ -80,10 +80,6 @@ resource "aws_db_instance" "mr-ss-db-instance" {
 resource "vercel_project" "mr-ss_web" {
   name      = "swipe-script"
   framework = "nextjs"
-  git_repository = {
-    type = "github"
-    repo = "sjoerdvanbommel/monorepo"
-  }
   root_directory = "packages/swipe-script/web"
   install_command = "pnpm i"
   serverless_function_region = "lhr1"

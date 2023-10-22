@@ -36,3 +36,8 @@ jobs:
           pnpm run db:seed
         env:
           DATABASE_URL: postgresql://${{ vars.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@${{ vars.POSTGRES_HOST }}:${{ vars.POSTGRES_PORT }}/${{ vars.POSTGRES_DB }}
+
+      - name: Deploy @mr-ss/web to vercel
+        run: |
+          pnpm install -g vercel
+          vercel deploy -t ${{ secrets.VERCEL_API_TOKEN }} --yes --name swipe-script
