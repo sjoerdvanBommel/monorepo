@@ -1,6 +1,6 @@
 'use client'
 
-import type { Question } from '@mr-ss/database'
+// import type { Question } from '@mr-ss/database'
 import { motion } from 'framer'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -9,7 +9,7 @@ import { TruthyOrFalsy } from './question-headers/truthy-or-falsy'
 import { SwipeCard } from './swipe-card'
 
 interface Props {
-  initialQuestions: Question[]
+  initialQuestions: any[]
 }
 
 export const SwipeScript = ({ initialQuestions }: Props) => {

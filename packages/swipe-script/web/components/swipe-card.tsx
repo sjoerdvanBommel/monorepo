@@ -1,4 +1,4 @@
-import { Question } from '@mr-ss/database'
+// import { Question } from '@mr-ss/database'
 import {
   DragHandlers,
   PanInfo,
@@ -8,9 +8,9 @@ import {
 } from 'framer'
 
 interface Props {
-  question: Question
-  onSwipeLeft?: (questionId: Question['id']) => void
-  onSwipeRight?: (questionId: Question['id']) => void
+  question: any
+  onSwipeLeft?: (questionId: any['id']) => void
+  onSwipeRight?: (questionId: any['id']) => void
   startTyping?: boolean
 }
 

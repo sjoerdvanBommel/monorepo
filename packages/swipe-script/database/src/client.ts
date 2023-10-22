@@ -1,20 +1,15 @@
-import type { PrismaClient as ImportedPrismaClient } from '@prisma/client'
-import { createRequire } from 'module'
+import { PrismaClient } from '@prisma/client'
 import { questionTypes } from './seed/generate-seed-data'
 
-const require = createRequire(import.meta.url ?? __filename)
+declare global {
+  var prisma: PrismaClient | undefined
+}
 
-const { PrismaClient: RequiredPrismaClient } = require('@prisma/client')
+export const prisma = global.prisma || new PrismaClient()
 
-const _PrismaClient: typeof ImportedPrismaClient = RequiredPrismaClient
+if (process.env.NODE_ENV !== 'production') global.prisma = prisma
 
-class PrismaClient extends _PrismaClient {}
-
-export const prisma = new PrismaClient()
-
-export type * from '@prisma/client'
-
-export const a = '1'
+// export * from '@prisma/client'
 
 /** The ID of the `Truthy or Falsy?` question type based on the seed data */
 export const TRUTHY_OR_FALSY_QT_ID = questionTypes.find(
