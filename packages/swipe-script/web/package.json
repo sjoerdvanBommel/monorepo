@@ -19,7 +19,7 @@
   "devDependencies": {
     "@mr-ss/database": "workspace:*",
     "@mr/config": "workspace:*",
-    "@mr/utils": "workspace:^",
+    "@mr/utils": "workspace:*",
     "@prettier/plugin-xml": "^3.2.1",
     "@prisma/nextjs-monorepo-workaround-plugin": "^5.4.2",
     "@types/node": "^20.8.7",

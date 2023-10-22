@@ -17,7 +17,7 @@
     "setup": "pnpm run setup:env && turbo run setup"
   },
   "devDependencies": {
-    "@mr/config": "workspace:^",
+    "@mr/config": "workspace:*",
     "prettier": "^3.0.3",
     "rimraf": "^5.0.5",
     "tsx": "^3.14.0",

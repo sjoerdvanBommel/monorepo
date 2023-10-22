@@ -3,12 +3,15 @@ terraform {
     postgresql = {
       source  = "cyrilgdn/postgresql"
     }
+    
+    vercel = {
+      source = "vercel/vercel"
+      version = "~> 0.4"
+    }
   }
 
   required_version = ">= 1.0.0"
-}
 
-terraform {
   backend "s3" {
     bucket = "mr-ss-terraform-state"
     key    = "terraform_state"
@@ -31,6 +34,10 @@ provider "postgresql" {
   sslmode         = "require"
   connect_timeout = 15
   superuser       = false
+}
+
+provider "vercel" {
+  api_token = var.VERCEL_API_TOKEN
 }
 
 // POSTGRES
@@ -70,12 +77,23 @@ resource "aws_db_instance" "mr-ss-db-instance" {
   skip_final_snapshot    = true
 }
 
-resource "postgresql_role" "user_name" {
-  name                = var.POSTGRES_USERNAME
-  login               = true
-  password            = var.POSTGRES_USER_PASSWORD
-  encrypted_password  = true
-  create_database     = true
-  create_role         = true
-  skip_reassign_owned = true
+# resource "postgresql_role" "user_name" {
+#   name                = var.POSTGRES_USERNAME
+#   login               = true
+#   password            = var.POSTGRES_USER_PASSWORD
+#   encrypted_password  = true
+#   create_database     = true
+#   create_role         = true
+#   skip_reassign_owned = true
+# }
+
+resource "vercel_project" "mr-ss_web" {
+  name      = "swipe-script"
+  framework = "nextjs"
+  git_repository = {
+    type = "github"
+    repo = "sjoerdvanbommel/monorepo"
+  }
+  root_directory = "packages/swipe-script/web"
+  install_command = "pnpm i"
 }

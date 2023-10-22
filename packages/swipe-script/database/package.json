@@ -26,7 +26,8 @@
     "lint": "eslint \"src/**/*.ts\"",
     "studio": "prisma studio",
     "docker-compose": "docker compose -f docker-compose.yml -f node_modules/@mr/pg-admin/docker-compose.yml up -d",
-    "docker-compose:no-admin": "docker compose up -d"
+    "docker-compose:no-admin": "docker compose up -d",
+    "postinstall": "prisma generate --schema=./prisma/schema.prisma"
   },
   "dependencies": {
     "@prisma/client": "^5.4.2"

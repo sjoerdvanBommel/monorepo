@@ -1,1 +1,3 @@
-module.exports = require('@mr/config/eslint/nextjs.cjs')
+module.exports = {
+  extends: [require.resolve('@mr/config/eslint/nextjs.cjs')],
+}

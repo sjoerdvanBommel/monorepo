@@ -4,7 +4,7 @@
   "globalEnv": ["NODE_ENV"],
   "pipeline": {
     "build": {
-      "dependsOn": ["^build", "db:push"],
+      "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
     "db:migrate:dev": {
@@ -25,7 +25,6 @@
       "persistent": true
     },
     "db:generate": {
-      "dependsOn": ["docker-compose"],
       "cache": false
     },
     "lint": {},
@@ -34,7 +33,7 @@
     },
     "clean": {},
     "setup": {
-      "dependsOn": ["db:seed"]
+      "dependsOn": ["docker-compose", "db:seed"]
     }
   }
 }

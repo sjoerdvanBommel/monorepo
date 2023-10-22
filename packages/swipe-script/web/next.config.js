@@ -3,7 +3,7 @@ import { PrismaPlugin } from '@prisma/nextjs-monorepo-workaround-plugin'
 /**
  * @type {import('next').NextConfig}
  */
-export default {
+const config = {
   webpack: (config, { isServer }) => {
     if (isServer) {
       config.externals.push('_http_common', 'encoding')
@@ -12,5 +12,10 @@ export default {
 
     return config
   },
+  experimental: {
+    serverActions: true,
+  },
   reactStrictMode: true,
 }
+
+export default config

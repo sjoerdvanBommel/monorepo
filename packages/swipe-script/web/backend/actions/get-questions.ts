@@ -1,3 +1,5 @@
+'use server'
+
 import { QuestionType } from '@mr-ss/database'
 import { adaptiveStrategy } from '../question-selection/strategies/adaptive-strategy'
 import { startStrategy } from '../question-selection/strategies/start-strategy'

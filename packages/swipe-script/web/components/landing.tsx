@@ -84,7 +84,7 @@ export const Landing = () => {
           shallow
         >
           <strong className="block tracking-wide bg-black-accent rounded-[inherit] px-4 py-3 text-xl">
-            Let's give it a try!
+            Let&apos;s give it a try!
           </strong>
         </Link>
       </div>

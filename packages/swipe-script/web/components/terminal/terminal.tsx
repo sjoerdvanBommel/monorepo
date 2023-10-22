@@ -164,6 +164,7 @@ export const Terminal = ({
     container.innerHTML = ''
 
     start()
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- TODO: Needs bigger refactoring
   }, [lineData])
 
   return <div className="font-code opacity-0" ref={containerRef} />

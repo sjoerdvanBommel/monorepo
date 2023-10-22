@@ -9,7 +9,7 @@ importers:
   .:
     devDependencies:
       '@mr/config':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:packages/config
       prettier:
         specifier: ^3.0.3
@@ -112,7 +112,7 @@ importers:
         specifier: workspace:*
         version: link:../../config
       '@mr/utils':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../../utils
       '@prettier/plugin-xml':
         specifier: ^3.2.1
