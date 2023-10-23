@@ -10,8 +10,14 @@ jobs:
   deploy_staging:
     runs-on: ubuntu-latest
     steps:
+      - name: Set environmental variables
+        run: echo "DATABASE_URL=postgresql://${{ vars.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@${{ vars.POSTGRES_HOST }}:${{ vars.POSTGRES_PORT }}/${{ vars.POSTGRES_DB }}" >> $GITHUB_ENV
+
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Initialize Terraform
+        uses: hashicorp/setup-terraform@v2
 
       - name: Install Node.js
         uses: actions/setup-node@v3
@@ -19,23 +25,42 @@ jobs:
           node-version: 20
 
       - uses: pnpm/action-setup@v2
-        name: Install pnpm
+        name: Install dependencies
         with:
           run_install: true
           version: 8
+
+      - name: Apply architectural changes
+        run: |
+          pnpm terraform:init
+          pnpm terraform:apply
+        env:
+          AWS_REGION: ${{ vars.AWS_DEFAULT_REGION }}
+          AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          TF_VAR_AWS_REGION: ${{ vars.AWS_DEFAULT_REGION }}
+          TF_VAR_AWS_ACCESS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          TF_VAR_AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          TF_VAR_POSTGRES_PORT: ${{ vars.POSTGRES_PORT }}
+          TF_VAR_POSTGRES_DB_NAME: ${{ env.POSTGRES_DB }}
+          TF_VAR_POSTGRES_DB_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          TF_VAR_POSTGRES_USERNAME: ${{ vars.POSTGRES_USER }}
+          TF_VAR_POSTGRES_USER_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          TF_VAR_POSTGRES_IDENTIFIER: ${{ vars.POSTGRES_IDENTIFIER }}
+          TF_VAR_POSTGRES_DB_INSTANCE_NAME: ${{ env.POSTGRES_DB }}
+          TF_VAR_VERCEL_API_TOKEN: ${{ secrets.VERCEL_API_TOKEN }}
 
       - name: Apply latest database migrations
         run: |
           pnpm run db:generate
           pnpm run db:migrate:deploy
         env:
-          DATABASE_URL: postgresql://${{ vars.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@${{ vars.POSTGRES_HOST }}:${{ vars.POSTGRES_PORT }}/${{ vars.POSTGRES_DB }}
+          DATABASE_URL: ${{ env.DATABASE_URL }}
 
       - name: Seed database
-        run: |
-          pnpm run db:seed
+        run: pnpm run db:seed
         env:
-          DATABASE_URL: postgresql://${{ vars.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@${{ vars.POSTGRES_HOST }}:${{ vars.POSTGRES_PORT }}/${{ vars.POSTGRES_DB }}
+          DATABASE_URL: ${{ env.DATABASE_URL }}
 
       - name: Deploy @mr-ss/web to vercel
         run: |

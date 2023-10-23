@@ -52,13 +52,13 @@ export const generateSeedData = async () => {
       answers.push(
         {
           id: answerId++,
-          is_correct: !!eval(`(${question1Text})`),
+          is_correct: !!(0, eval)(`(${question1Text})`),
           answer_text: 'Truthy',
           question_id: questionId,
         },
         {
           id: answerId++,
-          is_correct: !eval(`(${question1Text})`),
+          is_correct: !(0, eval)(`(${question1Text})`),
           answer_text: 'Falsy',
           question_id: questionId,
         },
@@ -76,13 +76,13 @@ export const generateSeedData = async () => {
       answers.push(
         {
           id: answerId++,
-          is_correct: !!eval(`(${question2Text})`),
+          is_correct: !!(0, eval)(`(${question2Text})`),
           answer_text: 'Truthy',
           question_id: questionId,
         },
         {
           id: answerId++,
-          is_correct: !eval(`(${question2Text})`),
+          is_correct: !(0, eval)(`(${question2Text})`),
           answer_text: 'Falsy',
           question_id: questionId,
         },

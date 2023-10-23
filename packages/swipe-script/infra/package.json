@@ -2,5 +2,10 @@
   "name": "@mr-ss/infra",
   "version": "0.0.0",
   "private": true,
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "terraform:init": "terraform init",
+    "terraform:plan": "terraform plan",
+    "terraform:apply": "terraform apply -auto-approve"
+  }
 }

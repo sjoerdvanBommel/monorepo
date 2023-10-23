@@ -1,11 +1,11 @@
 terraform {
   required_providers {
     postgresql = {
-      source  = "cyrilgdn/postgresql"
+      source = "cyrilgdn/postgresql"
     }
     
     vercel = {
-      source = "vercel/vercel"
+      source  = "vercel/vercel"
       version = "~> 0.4"
     }
   }
@@ -78,15 +78,15 @@ resource "aws_db_instance" "mr-ss-db-instance" {
 }
 
 resource "vercel_project" "mr-ss_web" {
-  name      = "swipe-script"
-  framework = "nextjs"
-  root_directory = "packages/swipe-script/web"
-  install_command = "pnpm i"
-  serverless_function_region = "lhr1"
+  name                        = "swipe-script"
+  framework                   = "nextjs"
+  root_directory              = "packages/swipe-script/web"
+  install_command             = "pnpm i"
+  serverless_function_region  = "lhr1"
   environment = [{
-    key        = "DATABASE_URL"
-    value      = "postgresql://${var.POSTGRES_USERNAME}:${var.POSTGRES_DB_PASSWORD}@${aws_db_instance.mr-ss-db-instance.endpoint}/${var.POSTGRES_DB_NAME}"
-    target     = ["preview"]
+    key                       = "DATABASE_URL"
+    value                     = "postgresql://${var.POSTGRES_USERNAME}:${var.POSTGRES_DB_PASSWORD}@${aws_db_instance.mr-ss-db-instance.endpoint}/${var.POSTGRES_DB_NAME}"
+    target                    = ["preview"]
   }]
 }
 
