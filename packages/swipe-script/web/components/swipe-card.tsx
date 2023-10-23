@@ -6,6 +6,7 @@ import {
   useAnimation,
   useMotionValue,
 } from 'framer'
+import { Terminal } from './terminal/terminal'
 
 interface Props {
   question: Question
@@ -53,20 +54,27 @@ export const SwipeCard = ({
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{
-          duration: 0.5,
+          duration: 0.25,
           ease: [0, 0.71, 0.2, 1.01],
         }}
-        className="text-center font-semibold font-code mt-20"
+        className="flex flex-col w-full h-full font-semibold font-code pt-6"
         style={{ fontSize }}
       >
-        {question.question_text}
+        <Terminal
+          lineData={[
+            {
+              value: 'Is the following JavaScript expression truthy or falsy?',
+            },
+            { type: 'input', prompt: '>', value: question.question_text },
+          ]}
+        />
       </motion.div>
     </motion.div>
   )
 }
 
 function isSwipingLeft(info: PanInfo, x: number) {
-  const isFastSwipingLeft = info.velocity.x < -50
+  const isFastSwipingLeft = info.velocity.x < -1000
   const isSlowSwipingLeft = info.velocity.x < -10
   const isNotSwipingRight = info.velocity.x <= 0
   const cardOnLeftSide = x < 0
@@ -80,7 +88,7 @@ function isSwipingLeft(info: PanInfo, x: number) {
 }
 
 function isSwipingRight(info: PanInfo, x: number) {
-  const isFastSwipingRight = info.velocity.x > 50
+  const isFastSwipingRight = info.velocity.x > 1000
   const isSlowSwipingRight = info.velocity.x > 10
   const isNotSwipingRight = info.velocity.x >= 0
   const cardOnRightSide = x > 0

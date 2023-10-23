@@ -1,14 +1,29 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import { twMerge } from 'tailwind-merge'
+import { Background } from './background'
 
 export const Landing = () => {
   const searchParams = useSearchParams()
+  const pathname = usePathname()
   const started = searchParams.has('started')
+
+  const startedSearchParams = new URLSearchParams(searchParams)
+  startedSearchParams.set('started', 'true')
+  const startedUrl = `${pathname}?${startedSearchParams.toString()}`
 
   return (
     <div className="w-full min-h-full overflow-hidden relative">
+      <div
+        className={twMerge(
+          'transition-opacity duration-500',
+          started && 'opacity-0',
+        )}
+      >
+        <Background />
+      </div>
+
       <div
         className={twMerge(
           'flex flex-col justify-center text-center mt-12 sm:mt-16 lg:mt-20',
@@ -80,7 +95,7 @@ export const Landing = () => {
       >
         <Link
           className="block text-center bg-gradient-to-br from-primary to-secondary rounded-xl w-full p-0.5"
-          href={'/?started'}
+          href={startedUrl}
           shallow
         >
           <strong className="block tracking-wide bg-black-accent rounded-[inherit] px-4 py-3 text-xl">

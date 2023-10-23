@@ -49,7 +49,7 @@ export const Terminal = ({
   progressPercent = 100,
   progressChar = '█',
   cursor = '▋',
-  startTyping = false,
+  startTyping = true,
   lineData,
 }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null)

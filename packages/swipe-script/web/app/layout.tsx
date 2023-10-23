@@ -1,7 +1,6 @@
 import { Metadata } from 'next'
 import { Fredoka, Titan_One } from 'next/font/google'
 import localFont from 'next/font/local'
-import { Background } from '../components/background'
 import './globals.css'
 
 const titanOne = Titan_One({
@@ -32,10 +31,7 @@ export default function RootLayout({
       <body
         className={`w-full h-full ${titanOne.variable} ${fredoka.variable} ${consolas.variable}`}
       >
-        <div className="w-full h-full relative overflow-hidden">
-          <Background />
-          {children}
-        </div>
+        <div className="w-full h-full relative overflow-hidden">{children}</div>
       </body>
     </html>
   )

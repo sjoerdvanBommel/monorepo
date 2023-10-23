@@ -51,6 +51,7 @@ const config: Config = {
       error: 'rgb(var(--error) / <alpha-value>)',
 
       terminal: 'rgb(var(--terminal) / <alpha-value>)',
+      border: 'hsl(var(--border) / <alpha-value>)',
     },
   },
   plugins: [

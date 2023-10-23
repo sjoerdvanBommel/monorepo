@@ -43,9 +43,9 @@ export const SwipeScript = ({ initialQuestions }: Props) => {
 
   if (showQuestions) {
     return (
-      <>
+      <div className="flex flex-col w-full h-full">
         <TruthyOrFalsy />
-        <motion.div className="w-full h-full flex justify-center items-center relative">
+        <motion.div className="flex-grow justify-center items-center relative">
           {questions
             .slice(visibleCardIndex, visibleCardIndex + 1)
             .map((question) => (
@@ -58,9 +58,13 @@ export const SwipeScript = ({ initialQuestions }: Props) => {
               />
             ))}
         </motion.div>
-      </>
+      </div>
     )
   }
 
-  return <Landing />
+  return (
+    <>
+      <Landing />
+    </>
+  )
 }
