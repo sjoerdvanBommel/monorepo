@@ -28,8 +28,17 @@ svg {
 :root {
   --black-accent: 9 9 11;
   --white-accent: 240 240 242;
+
+  --success-900: 120 92% 9%;
+  --success-700: 120 65% 28%;
   --success: 15 131 7;
+  --success-200: 120 50% 63%;
+
+  --error-900: 349 94% 10%;
+  --error-700: 350 94% 17%;
   --error: 175 8 36;
+  --error-200: 0 55% 64%;
+
   --primary: 255 247 23;
   --secondary: 255 21 114;
   --border: 240 3.7% 15.9%;

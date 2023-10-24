@@ -1,6 +1,6 @@
 import { SVGProps } from 'react'
 
-export const ArrowLong = (props: SVGProps<SVGSVGElement>) => {
+export const ArrowLongIcon = (props: SVGProps<SVGSVGElement>) => {
   // Random ID for linear gradient so this SVG can be used multiple times
   const id = (Math.random() + 1).toString(36).substring(7)
 

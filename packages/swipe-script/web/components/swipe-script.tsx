@@ -1,7 +1,6 @@
 'use client'
 
 import type { Question } from '@mr-ss/database'
-import { motion } from 'framer'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { Landing } from './landing'
@@ -45,19 +44,18 @@ export const SwipeScript = ({ initialQuestions }: Props) => {
     return (
       <div className="flex flex-col w-full h-full">
         <TruthyOrFalsy />
-        <motion.div className="flex-grow justify-center items-center relative">
+        <div className="flex-grow justify-center items-center relative">
           {questions
             .slice(visibleCardIndex, visibleCardIndex + 1)
             .map((question) => (
               <SwipeCard
                 key={question.id}
                 question={question}
-                startTyping
                 onSwipeLeft={onSwipeLeft}
                 onSwipeRight={onSwipeRight}
               />
             ))}
-        </motion.div>
+        </div>
       </div>
     )
   }

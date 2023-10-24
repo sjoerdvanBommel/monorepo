@@ -47,11 +47,21 @@ const config: Config = {
       'white-accent': 'rgb(var(--white-accent) / <alpha-value>)',
       primary: 'rgb(var(--primary) / <alpha-value>)',
       secondary: 'rgb(var(--secondary) / <alpha-value>)',
-      success: 'rgb(var(--success) / <alpha-value>)',
-      error: 'rgb(var(--error) / <alpha-value>)',
+      success: {
+        900: 'hsla(var(--success-900) / <alpha-value>)',
+        700: 'hsla(var(--success-700) / <alpha-value>)',
+        DEFAULT: 'rgb(var(--success) / <alpha-value>)',
+        200: 'hsla(var(--success-200) / <alpha-value>)',
+      },
+      error: {
+        900: 'hsla(var(--error-900) / <alpha-value>)',
+        700: 'hsla(var(--error-700) / <alpha-value>)',
+        DEFAULT: 'rgb(var(--error) / <alpha-value>)',
+        200: 'hsla(var(--error-200) / <alpha-value>)',
+      },
 
       terminal: 'rgb(var(--terminal) / <alpha-value>)',
-      border: 'hsl(var(--border) / <alpha-value>)',
+      border: 'hsla(var(--border) / <alpha-value>)',
     },
   },
   plugins: [
