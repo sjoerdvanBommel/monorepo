@@ -18,9 +18,8 @@
       "dependsOn": ["db:generate"],
       "cache": false
     },
-    "db:seed": {
-      "cache": false
-    },
+    "db:seed": { "cache": false },
+    "db:clean": { "cache": false },
     "dev": {
       "cache": false,
       "persistent": true

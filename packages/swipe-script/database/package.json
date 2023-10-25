@@ -20,6 +20,7 @@
     "db:migrate:dev": "prisma migrate dev",
     "db:push": "prisma db push",
     "db:seed": "tsx src/seed/seed.ts",
+    "db:clean": "tsx src/seed/clean.ts",
     "db:generate": "prisma generate",
     "dev": "tsup --watch",
     "format": "prisma format",

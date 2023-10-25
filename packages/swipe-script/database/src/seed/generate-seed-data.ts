@@ -33,7 +33,7 @@ export const questionTypes: readonly QuestionType[] = [
 ] as const
 
 export const generateSeedData = async () => {
-  const questions: Question[] = []
+  const questions: Omit<Question, 'answers'>[] = []
   const answers: Answer[] = []
 
   let questionId = 1
@@ -71,7 +71,7 @@ export const generateSeedData = async () => {
         question_type_id: TRUTHY_OR_FALSY_QT_ID,
       })
 
-      const question2Text = `(${situation1.label} === ${situation2.label})`
+      const question2Text = `${situation1.label} === ${situation2.label}`
 
       answers.push(
         {

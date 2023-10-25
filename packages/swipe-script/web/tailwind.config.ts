@@ -2,6 +2,14 @@ import type { Config } from 'tailwindcss'
 import { fontFamily } from 'tailwindcss/defaultTheme'
 import plugin from 'tailwindcss/plugin'
 
+// Workaround for framer motion which does not accept CSS variables for animations
+export const framerColors = {
+  'black-accent': 'hsl(240 10% 4%)',
+  'success-900': 'hsl(120 92% 6%)',
+  'error-900': 'hsl(349 94% 10%)',
+  border: 'hsl(240 3.7% 15.9%)',
+}
+
 const config: Config = {
   content: [
     './app/**/*.{js,ts,jsx,tsx,mdx}',
@@ -66,55 +74,59 @@ const config: Config = {
     },
     colors: {
       transparent: 'transparent',
-      'black-accent': 'hsla(var(--black-accent) / <alpha-value>)',
-      'white-accent': 'rgb(var(--white-accent) / <alpha-value>)',
+      'black-accent': framerColors['black-accent'],
+      'white-accent': 'var(--white-accent)',
       success: {
-        900: 'hsla(var(--success-900) / <alpha-value>)',
-        700: 'hsla(var(--success-700) / <alpha-value>)',
-        DEFAULT: 'hsla(var(--success) / <alpha-value>)',
-        200: 'hsla(var(--success-200) / <alpha-value>)',
+        900: framerColors['success-900'],
+        700: 'var(--success-700)',
+        DEFAULT: 'var(--success)',
+        200: 'var(--success-200)',
+        100: 'var(--success-100)',
+        50: 'var(--success-50)',
       },
       error: {
-        900: 'hsla(var(--error-900) / <alpha-value>)',
-        700: 'hsla(var(--error-700) / <alpha-value>)',
-        DEFAULT: 'hsla(var(--error) / <alpha-value>)',
-        200: 'hsla(var(--error-200) / <alpha-value>)',
+        900: framerColors['error-900'],
+        700: 'var(--error-700)',
+        DEFAULT: 'var(--error)',
+        200: 'var(--error-200)',
+        100: 'var(--error-100)',
+        50: 'var(--error-50)',
       },
 
-      terminal: 'rgb(var(--terminal) / <alpha-value>)',
-      border: 'hsla(var(--border) / <alpha-value>)',
+      terminal: 'var(--terminal)',
+      border: framerColors.border,
 
-      input: 'hsl(var(--input))',
-      ring: 'hsl(var(--ring))',
-      background: 'hsl(var(--background))',
-      foreground: 'hsl(var(--foreground))',
+      input: 'var(--input)',
+      ring: 'var(--ring)',
+      background: 'var(--background)',
+      foreground: 'var(--foreground)',
       primary: {
-        DEFAULT: 'hsla(var(--primary) / <alpha-value>)',
-        foreground: 'hsl(var(--primary-foreground))',
+        DEFAULT: 'var(--primary)',
+        foreground: 'var(--primary-foreground)',
       },
       secondary: {
-        DEFAULT: 'rgb(var(--secondary) / <alpha-value>)',
-        foreground: 'hsl(var(--secondary-foreground))',
+        DEFAULT: 'var(--secondary)',
+        foreground: 'var(--secondary-foreground)',
       },
       destructive: {
-        DEFAULT: 'hsl(var(--destructive))',
-        foreground: 'hsl(var(--destructive-foreground))',
+        DEFAULT: 'var(--destructive)',
+        foreground: 'var(--destructive-foreground)',
       },
       muted: {
-        DEFAULT: 'hsl(var(--muted))',
-        foreground: 'hsl(var(--muted-foreground))',
+        DEFAULT: 'var(--muted)',
+        foreground: 'var(--muted-foreground)',
       },
       accent: {
-        DEFAULT: 'hsl(var(--accent))',
-        foreground: 'hsl(var(--accent-foreground))',
+        DEFAULT: 'var(--accent)',
+        foreground: 'var(--accent-foreground)',
       },
       popover: {
-        DEFAULT: 'hsl(var(--popover))',
-        foreground: 'hsl(var(--popover-foreground))',
+        DEFAULT: 'var(--popover)',
+        foreground: 'var(--popover-foreground)',
       },
       card: {
-        DEFAULT: 'hsl(var(--card))',
-        foreground: 'hsl(var(--card-foreground))',
+        DEFAULT: 'var(--card)',
+        foreground: 'var(--card-foreground)',
       },
     },
   },

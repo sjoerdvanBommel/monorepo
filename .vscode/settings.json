@@ -4,6 +4,9 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "javascript.suggestionActions.enabled": false,
   "files.associations": {
-    "*.svg": "html"
-  }
+    "*.svg": "html",
+    "*.css": "tailwindcss"
+  },
+  "editor.colorDecorators": true,
+  "editor.defaultColorDecorators": true
 }

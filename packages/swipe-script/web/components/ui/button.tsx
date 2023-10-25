@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils'
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
+import { motion, MotionValue, useTransform } from 'framer'
 import { ButtonHTMLAttributes, forwardRef } from 'react'
 
 const buttonVariants = cva(
@@ -23,6 +24,7 @@ const buttonVariants = cva(
         sm: 'h-9 rounded-md px-3',
         lg: 'h-11 rounded-md px-8',
         icon: 'h-10 w-10',
+        square: 'aspect-square',
       },
     },
     defaultVariants: {
@@ -38,9 +40,40 @@ export interface ButtonProps
   asChild?: boolean
 }
 
+export interface FramerButtonProps
+  extends Omit<
+      ButtonHTMLAttributes<HTMLButtonElement>,
+      'onAnimationStart' | 'onDragStart' | 'onDragEnd' | 'onDrag'
+    >,
+    VariantProps<typeof buttonVariants> {
+  swipeProgress: MotionValue<number>
+}
+
+const SwipeProgressButton = ({
+  swipeProgress,
+  className,
+  variant,
+  size,
+  ...props
+}: FramerButtonProps) => {
+  const borderColor = useTransform(
+    swipeProgress,
+    [-1, 0, 1],
+    ['hsl(349 94% 10%)', 'hsl(240 3.7% 15.9%)', 'hsl(120 92% 9%)'],
+  )
+  return (
+    <motion.button
+      className={cn(buttonVariants({ variant, size, className }))}
+      {...props}
+      style={{ ...props.style, borderColor }}
+    />
+  )
+}
+
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button'
+
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
@@ -52,4 +85,4 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 )
 Button.displayName = 'Button'
 
-export { Button, buttonVariants }
+export { Button, buttonVariants, SwipeProgressButton }
