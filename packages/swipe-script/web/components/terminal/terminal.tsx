@@ -38,6 +38,7 @@ interface Props {
   cursor?: string
   /** Don't initialise the animation */
   startTyping?: boolean
+  style?: string
 }
 
 export const Terminal = ({
@@ -51,6 +52,7 @@ export const Terminal = ({
   cursor = '▋',
   startTyping = true,
   lineData,
+  style,
 }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null)
 

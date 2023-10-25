@@ -19,7 +19,6 @@
 [data-termynal] {
   opacity: 1;
   transition: opacity 1s;
-  @apply w-auto h-full m-4 border rounded-md border-border p-4 text-lg;
 }
 
 [data-termynal]:before {

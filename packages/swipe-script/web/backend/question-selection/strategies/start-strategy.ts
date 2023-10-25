@@ -11,6 +11,7 @@ export const startStrategy: QuestionSelectionStrategy<
       difficulty_level: { in: [4, 5] },
       question_type_id: questionTypeId,
     },
+    include: { answers: true },
   })
 
   return questions

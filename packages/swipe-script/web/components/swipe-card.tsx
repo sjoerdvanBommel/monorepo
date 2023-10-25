@@ -7,6 +7,7 @@ import {
   useMotionValue,
   useTransform,
 } from 'framer'
+import { useWindowSize } from 'usehooks-ts'
 import { Terminal } from './terminal/terminal'
 
 interface Props {
@@ -16,23 +17,34 @@ interface Props {
 }
 
 const swipeAwayTimeMs = 750
-const guaranteedSwipeDist = 200
 
 export const SwipeCard = ({ question, onSwipeLeft, onSwipeRight }: Props) => {
+  const guaranteedSwipeDist = useWindowSize().width / 2
   const x = useMotionValue(0)
-  const background = useTransform(x, [0, guaranteedSwipeDist], [0, 1])
-
-  const fontSize = `${Math.min(2 / (question.question_text.length / 15), 2)}em`
+  const background = useTransform(
+    x,
+    [-guaranteedSwipeDist, 0, guaranteedSwipeDist],
+    [
+      'linear-gradient(to top right, hsl(349 94% 5%) 0%, hsl(240, 10%, 4%) 100%)',
+      'linear-gradient(to top right, hsl(240, 10%, 4%) 0%, hsl(240, 10%, 4%) 100%)',
+      'linear-gradient(to top left, hsl(120 92% 4%) 0%, hsl(240, 10%, 4%) 100%)',
+    ],
+  )
+  const borderColor = useTransform(
+    x,
+    [-guaranteedSwipeDist, 0, guaranteedSwipeDist],
+    ['hsl(349 94% 10%)', 'hsl(240 3.7% 15.9%)', 'hsl(120 92% 9%)'],
+  )
 
   const controls = useAnimation()
 
   const onDragEnd: DragHandlers['onDragEnd'] = async (_, info) => {
     const transition = { duration: swipeAwayTimeMs / 1000 }
 
-    if (isSwipingLeft(info, x.get())) {
+    if (isSwipingLeft(info, x.get(), guaranteedSwipeDist)) {
       await controls.start({ x: '-100vw', transition })
       onSwipeLeft?.(question.id)
-    } else if (isSwipingRight(info, x.get())) {
+    } else if (isSwipingRight(info, x.get(), guaranteedSwipeDist)) {
       await controls.start({ x: '100vw', transition })
       onSwipeRight?.(question.id)
     }
@@ -56,65 +68,51 @@ export const SwipeCard = ({ question, onSwipeLeft, onSwipeRight }: Props) => {
             ease: [0, 0.71, 0.2, 1.01],
           }}
           className="flex flex-col w-full h-full font-semibold font-code pt-6"
-          style={{ fontSize }}
         >
-          <Terminal
-            lineData={[
-              {
-                value:
-                  'Is the following JavaScript expression truthy or falsy?',
-              },
-              { type: 'input', prompt: '>', value: question.question_text },
-            ]}
-          />
+          <motion.div
+            className="w-auto h-full m-4 border rounded-md border-border p-4 text-lg"
+            style={{ background, borderColor }}
+          >
+            <Terminal
+              lineData={[
+                {
+                  value:
+                    'Is the following JavaScript expression truthy or falsy?',
+                },
+                { type: 'input', prompt: '>', value: question.question_text },
+              ]}
+            />
+          </motion.div>
         </motion.div>
       </motion.div>
-
-      <div className="absolute bottom-0 w-full p-8 flex justify-between">
-        <motion.svg className="w-40 h-40 -rotate-90" viewBox="0 0 600 600">
-          <motion.circle
-            cx="100"
-            cy="100"
-            r="80"
-            stroke="#ff0055"
-            pathLength={background}
-            className={'stroke-[20px] fill-transparent stroke-success-700'}
-            style={{ strokeLinecap: 'round' }}
-          >
-            {/* {<XIcon className="w-5 text-error-200" />} */}
-          </motion.circle>
-        </motion.svg>
-        {/* <Indicator progress={x} type="error" />
-        <Indicator progress={x} type="success" /> */}
-      </div>
     </>
   )
 }
 
-function isSwipingLeft(info: PanInfo, x: number) {
+function isSwipingLeft(info: PanInfo, x: number, guaranteedSwipeDist: number) {
   const isFastSwipingLeft = info.velocity.x < -1000
-  const isSlowSwipingLeft = info.velocity.x < -10
-  const isNotSwipingRight = info.velocity.x <= 0
+  const isSlowSwipingLeft = info.velocity.x < -100
+  const isSwipingRight = info.velocity.x < 0
   const cardOnLeftSide = x < 0
   const cardFarLeft = x < -guaranteedSwipeDist
 
   return (
     isFastSwipingLeft ||
     (cardOnLeftSide && isSlowSwipingLeft) ||
-    (cardFarLeft && isNotSwipingRight)
+    (cardFarLeft && isSwipingRight)
   )
 }
 
-function isSwipingRight(info: PanInfo, x: number) {
+function isSwipingRight(info: PanInfo, x: number, guaranteedSwipeDist: number) {
   const isFastSwipingRight = info.velocity.x > 1000
-  const isSlowSwipingRight = info.velocity.x > 10
-  const isNotSwipingRight = info.velocity.x >= 0
+  const isSlowSwipingRight = info.velocity.x > 100
+  const isSwipingRight = info.velocity.x > 0
   const cardOnRightSide = x > 0
   const cardFarRight = x > guaranteedSwipeDist
 
   return (
     isFastSwipingRight ||
     (cardOnRightSide && isSlowSwipingRight) ||
-    (cardFarRight && isNotSwipingRight)
+    (cardFarRight && isSwipingRight)
   )
 }

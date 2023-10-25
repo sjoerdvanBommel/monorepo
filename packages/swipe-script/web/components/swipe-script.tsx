@@ -1,5 +1,6 @@
 'use client'
 
+import { Button } from '@/components/ui/button'
 import type { Question } from '@mr-ss/database'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -40,20 +41,25 @@ export const SwipeScript = ({ initialQuestions }: Props) => {
     )
   }
 
+  const currentQuestion = questions[visibleCardIndex]
+
   if (showQuestions) {
     return (
       <div className="flex flex-col w-full h-full">
         <TruthyOrFalsy />
         <div className="flex-grow justify-center items-center relative">
-          {questions
-            .slice(visibleCardIndex, visibleCardIndex + 1)
-            .map((question) => (
-              <SwipeCard
-                key={question.id}
-                question={question}
-                onSwipeLeft={onSwipeLeft}
-                onSwipeRight={onSwipeRight}
-              />
+          <SwipeCard
+            question={currentQuestion}
+            onSwipeLeft={onSwipeLeft}
+            onSwipeRight={onSwipeRight}
+          />
+        </div>
+        <div className="w-full p-8 flex justify-between">
+          {currentQuestion.answers &&
+            currentQuestion.answers.map((answer) => (
+              <Button variant={'outline'} key={answer.id}>
+                {answer.answer_text}
+              </Button>
             ))}
         </div>
       </div>

@@ -11,6 +11,7 @@ export const adaptiveStrategy: QuestionSelectionStrategy<
       difficulty_level: { in: [userScore - 1, userScore, userScore + 1] },
       question_type_id: questionTypeId,
     },
+    include: { answers: true },
   })
 
   return questions
