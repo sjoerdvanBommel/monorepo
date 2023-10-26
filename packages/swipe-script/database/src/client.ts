@@ -6,13 +6,19 @@ import {
 } from '@prisma/client'
 import { questionTypes } from './seed/generate-seed-data'
 
-declare global {
-  var prisma: PrismaClient | undefined
+const prismaClientSingleton = () => {
+  return new PrismaClient()
 }
 
-export const prisma = global.prisma || new PrismaClient()
+type PrismaClientSingleton = ReturnType<typeof prismaClientSingleton>
 
-if (process.env.NODE_ENV !== 'production') global.prisma = prisma
+// Workaround from Prisma docs to prevent Next.js from creating too many PrismaClients:
+// https://www.prisma.io/docs/guides/other/troubleshooting-orm/help-articles/nextjs-prisma-client-dev-practices
+const globalForPrisma = globalThis as unknown as {
+  prisma: PrismaClientSingleton | undefined
+}
+
+export const prisma = globalForPrisma.prisma ?? prismaClientSingleton()
 
 export * from '@prisma/client'
 
