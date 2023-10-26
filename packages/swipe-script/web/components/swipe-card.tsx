@@ -1,7 +1,7 @@
 import { Terminal } from '@/components/terminal/terminal'
 import { ValidAnswer } from '@/lib/types'
 import { framerColors } from '@/tailwind.config'
-import { Question } from '@mr-ss/database'
+import type { Question } from '@mr-ss/database'
 import {
   AnimationControls,
   DragHandlers,
@@ -110,7 +110,7 @@ function isSwipingLeft(info: PanInfo, x: number, guaranteedSwipeDist: number) {
 
 function isSwipingRight(info: PanInfo, x: number, guaranteedSwipeDist: number) {
   const isFastSwipingRight = info.velocity.x > 1000
-  const isSlowSwipingRight = info.velocity.x > 100
+  const isSlowSwipingRight = info.velocity.x > 70
   const isSwipingRight = info.velocity.x > 0
   const cardOnRightSide = x > 0
   const cardFarRight = x > guaranteedSwipeDist

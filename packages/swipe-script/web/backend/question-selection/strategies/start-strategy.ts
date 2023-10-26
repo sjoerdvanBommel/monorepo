@@ -1,17 +1,23 @@
-import { prisma } from '@mr-ss/database'
+import { Question, prisma } from '@mr-ss/database'
 import { StartStrategyData } from '../../types'
 import { QuestionSelectionStrategy } from './types'
 
 export const startStrategy: QuestionSelectionStrategy<
   StartStrategyData
 > = async (questionTypeId) => {
-  const questions = await prisma.question.findMany({
-    take: 10,
-    where: {
-      difficulty_level: { in: [4, 5] },
-      question_type_id: questionTypeId,
-    },
-    include: { answers: true },
+  // Raw query because selecting a random row is not supported by Prisma
+  const questions = await prisma.$queryRaw<
+    Question[]
+  >`SELECT * FROM "public"."Question" WHERE difficulty_level IN (4, 5) AND question_type_id = ${questionTypeId} ORDER BY random() LIMIT 10`
+
+  const answers = await prisma.answer.findMany({
+    where: { question_id: { in: questions.map((x) => x.id) } },
+  })
+
+  questions.forEach((question) => {
+    question.answers = answers.filter(
+      (answer) => answer.question_id === question.id,
+    )
   })
 
   return questions

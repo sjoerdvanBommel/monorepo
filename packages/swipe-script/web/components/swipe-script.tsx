@@ -50,7 +50,6 @@ export const SwipeScript = observer(() => {
       })
     }
 
-    console.log('answered', validAnswer)
     quizStore.answerQuestion(validAnswer)
   }
 
@@ -85,7 +84,7 @@ export const SwipeScript = observer(() => {
             variant={'outline'}
             size="square"
             onClick={() => onAnswer('left')}
-            className="w-full mb-2 from-black-accent to-black-accent text-xl hover:duration-200 hover:to-error-900 hover:border-error-700 bg-gradient-to-bl"
+            className="max-h-40 w-full mb-2 p-2 from-black-accent to-[var(--error-hover)] text-xl hover-hover:hover:[--error-hover:var(--error-900)] hover-hover:hover:border-error-700 bg-gradient-to-bl duration-300 transition-[all,--error-hover]"
           >
             <span className="bg-gradient-to-br bg-clip-text text-error-50">
               Falsy
@@ -95,7 +94,7 @@ export const SwipeScript = observer(() => {
             variant={'outline'}
             size="square"
             onClick={() => onAnswer('right')}
-            className="w-full mb-2 from-black-accent to-black-accent text-xl hover:duration-200 hover:to-success-900 hover:border-success-700 bg-gradient-to-br"
+            className="max-h-40 w-full mb-2 p-2 from-black-accent to-[var(--success-hover)] text-xl hover-hover:hover:[--success-hover:var(--success-900)] hover-hover:hover:border-success-700 bg-gradient-to-br duration-300 transition-[all,--success-hover]"
           >
             <span className="bg-gradient-to-br bg-clip-text text-success-50">
               Truthy

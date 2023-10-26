@@ -4,10 +4,19 @@ import {
   PrismaClient,
   Question as PrismaQuestion,
 } from '@prisma/client'
-import { questionTypes } from './seed/generate-seed-data'
 
 const prismaClientSingleton = () => {
-  return new PrismaClient()
+  if (process.env.NODE_ENV === 'production') {
+    return new PrismaClient()
+  }
+
+  const client = new PrismaClient({
+    log: [{ emit: 'event', level: 'query' }],
+  })
+  client.$on('query', (e) => {
+    console.log(`${e.query} ${e.params}`)
+  })
+  return client
 }
 
 type PrismaClientSingleton = ReturnType<typeof prismaClientSingleton>
@@ -29,8 +38,3 @@ export type QuestionWithAnswers = Simplify<
 >
 
 export type Question = Simplify<PrismaQuestion & Partial<QuestionWithAnswers>>
-
-/** The ID of the `Truthy or Falsy?` question type based on the seed data */
-export const TRUTHY_OR_FALSY_QT_ID = questionTypes.find(
-  (x) => x.type_name === 'Truthy or Falsy?',
-)!.id

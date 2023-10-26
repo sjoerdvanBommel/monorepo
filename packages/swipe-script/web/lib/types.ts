@@ -1,4 +1,4 @@
-import { Answer } from '@mr-ss/database'
+import type { Answer } from '@mr-ss/database'
 
 export type SwipeDirection = 'left' | 'right'
 

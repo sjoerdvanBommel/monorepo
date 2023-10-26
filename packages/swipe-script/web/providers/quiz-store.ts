@@ -1,8 +1,9 @@
 import { getQuestions } from '@/backend/actions/get-questions'
+import { TRUTHY_OR_FALSY_QT_ID } from '@/lib/constants'
 import { ValidAnswer } from '@/lib/types'
 import { getAnswer } from '@/lib/utils'
-import { Question, TRUTHY_OR_FALSY_QT_ID } from '@mr-ss/database'
-import { makeAutoObservable } from 'mobx'
+import type { Question } from '@mr-ss/database'
+import { makeAutoObservable, runInAction } from 'mobx'
 
 export class QuizStore {
   currentQuestionIndex!: number
@@ -48,9 +49,25 @@ export class QuizStore {
 
     this.currentQuestionIndex++
 
+    if (this.currentQuestionIndex > 1) {
+      this.replenishQuestions()
+    }
+
     if (answer.is_correct) {
       this.correctAnswers++
     }
+  }
+
+  protected async replenishQuestions() {
+    const newQuestions = await getQuestions({
+      questionTypeId: TRUTHY_OR_FALSY_QT_ID,
+      strategyData: { strategy: 'start' },
+    })
+
+    runInAction(() => {
+      this.questions = [this.currentQuestion, ...newQuestions]
+      this.currentQuestionIndex = 0
+    })
   }
 
   get wrongAnswers() {

@@ -1,9 +1,4 @@
-import {
-  Answer,
-  Question,
-  QuestionType,
-  TRUTHY_OR_FALSY_QT_ID,
-} from '../client'
+import { Answer, Question, QuestionType } from '../client'
 
 interface Situation {
   label: string
@@ -25,9 +20,11 @@ const situations: Situation[] = [
   { label: "Symbol('foo')", difficulty_level: 4 },
 ]
 
+const TRUTHY_OR_FALSY_QT_ID = 1
+
 export const questionTypes: readonly QuestionType[] = [
   {
-    id: 1,
+    id: TRUTHY_OR_FALSY_QT_ID,
     type_name: 'Truthy or Falsy?',
   },
 ] as const

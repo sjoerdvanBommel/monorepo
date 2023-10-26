@@ -129,6 +129,9 @@ const config: Config = {
         foreground: 'var(--card-foreground)',
       },
     },
+    screens: {
+      'hover-hover': { raw: '(hover: hover) and (pointer: fine)' },
+    },
   },
   plugins: [
     plugin(({ matchUtilities, theme }) => {

@@ -67,6 +67,19 @@ svg {
     --ring: hsl(0 0% 83.1%);
     --radius: 0.5rem;
   }
+
+  /* Solution for animated gradients */
+  @property --error-hover {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: hsl(240 10% 4%);
+  }
+
+  @property --success-hover {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: hsl(240 10% 4%);
+  }
 }
 
 @layer base {

@@ -1,4 +1,4 @@
-import { Question } from '@mr-ss/database'
+import type { Question } from '@mr-ss/database'
 import React, { PropsWithChildren, createContext, useContext } from 'react'
 import { QuizStore } from './quiz-store'
 
