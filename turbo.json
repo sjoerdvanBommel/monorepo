@@ -28,6 +28,7 @@
       "cache": false
     },
     "lint": {},
+    "lint:fix": {},
     "docker-compose": {
       "cache": false
     },

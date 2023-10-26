@@ -25,6 +25,7 @@
     "dev": "tsup --watch",
     "format": "prisma format",
     "lint": "eslint \"src/**/*.ts\"",
+    "lint:fix": "eslint \"src/**/*.ts\" --fix",
     "studio": "prisma studio",
     "docker-compose": "docker compose -f docker-compose.yml -f node_modules/@mr/pg-admin/docker-compose.yml up -d",
     "docker-compose:no-admin": "docker compose up -d",

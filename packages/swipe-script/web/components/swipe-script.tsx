@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button'
 import { QuizProgress } from '@/components/ui/quiz-progress'
-import { ValidAnswer } from '@/lib/types'
+import type { ValidAnswer } from '@/lib/types'
 import { useQuizStore } from '@/providers/quiz-provider'
 import { useAnimation, useMotionValue, useTransform } from 'framer'
 import { observer } from 'mobx-react-lite'

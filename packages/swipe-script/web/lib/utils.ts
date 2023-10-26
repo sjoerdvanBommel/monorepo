@@ -1,4 +1,4 @@
-import { ValidAnswer } from '@/lib/types'
+import type { ValidAnswer } from '@/lib/types'
 import type { Question } from '@mr-ss/database'
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'

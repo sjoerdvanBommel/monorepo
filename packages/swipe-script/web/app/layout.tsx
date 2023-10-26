@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { Fredoka, Titan_One } from 'next/font/google'
 import localFont from 'next/font/local'
 import './globals.css'

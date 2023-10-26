@@ -1,12 +1,13 @@
 import { Terminal } from '@/components/terminal/terminal'
-import { ValidAnswer } from '@/lib/types'
+import type { ValidAnswer } from '@/lib/types'
 import { framerColors } from '@/tailwind.config'
 import type { Question } from '@mr-ss/database'
-import {
+import type {
   AnimationControls,
   DragHandlers,
   MotionValue,
-  PanInfo,
+  PanInfo} from 'framer';
+import {
   motion,
   useTransform,
 } from 'framer'
