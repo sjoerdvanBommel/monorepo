@@ -1,8 +1,9 @@
-import { Simplify } from '@mr/utils'
-import {
+import type { Simplify } from '@mr/utils'
+import type {
   Prisma,
-  PrismaClient,
-  Question as PrismaQuestion,
+  Question as PrismaQuestion} from '@prisma/client';
+import {
+  PrismaClient
 } from '@prisma/client'
 
 const prismaClientSingleton = () => {

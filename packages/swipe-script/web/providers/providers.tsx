@@ -1,7 +1,7 @@
 'use client'
 
 import { QuizProvider } from '@/providers/quiz-provider'
-import { ComponentProps, PropsWithChildren } from 'react'
+import type { ComponentProps, PropsWithChildren } from 'react'
 
 export function Providers({
   children,

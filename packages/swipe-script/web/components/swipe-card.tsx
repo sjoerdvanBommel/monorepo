@@ -6,11 +6,9 @@ import type {
   AnimationControls,
   DragHandlers,
   MotionValue,
-  PanInfo} from 'framer';
-import {
-  motion,
-  useTransform,
+  PanInfo,
 } from 'framer'
+import { motion, useTransform } from 'framer'
 import { observer } from 'mobx-react-lite'
 import { useEffect } from 'react'
 import { useWindowSize } from 'usehooks-ts'
@@ -97,7 +95,7 @@ export const SwipeCard = observer(
 
 function isSwipingLeft(info: PanInfo, x: number, guaranteedSwipeDist: number) {
   const isFastSwipingLeft = info.velocity.x < -1000
-  const isSlowSwipingLeft = info.velocity.x < -100
+  const isSlowSwipingLeft = info.velocity.x < -50
   const isSwipingRight = info.velocity.x < 0
   const cardOnLeftSide = x < 0
   const cardFarLeft = x < -guaranteedSwipeDist
@@ -111,7 +109,7 @@ function isSwipingLeft(info: PanInfo, x: number, guaranteedSwipeDist: number) {
 
 function isSwipingRight(info: PanInfo, x: number, guaranteedSwipeDist: number) {
   const isFastSwipingRight = info.velocity.x > 1000
-  const isSlowSwipingRight = info.velocity.x > 70
+  const isSlowSwipingRight = info.velocity.x > 50
   const isSwipingRight = info.velocity.x > 0
   const cardOnRightSide = x > 0
   const cardFarRight = x > guaranteedSwipeDist

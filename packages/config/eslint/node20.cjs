@@ -9,4 +9,8 @@ module.exports = {
     node: true,
     es2023: true,
   },
+  rules: {
+    '@typescript-eslint/consistent-type-imports': 'error',
+  },
+  plugins: ['@typescript-eslint'],
 }

@@ -1,6 +1,6 @@
 import { getQuestions } from '@/backend/actions/get-questions'
 import { TRUTHY_OR_FALSY_QT_ID } from '@/lib/constants'
-import { ValidAnswer } from '@/lib/types'
+import type { ValidAnswer } from '@/lib/types'
 import { getAnswer } from '@/lib/utils'
 import type { Question } from '@mr-ss/database'
 import { makeAutoObservable, runInAction } from 'mobx'
@@ -35,7 +35,7 @@ export class QuizStore {
       initialQuestions ??
       (await getQuestions({
         questionTypeId: TRUTHY_OR_FALSY_QT_ID,
-        strategyData: { strategy: 'start' },
+        strategyData: { strategy: 'adaptive', userScore: 5 },
       }))
   }
 
@@ -61,7 +61,7 @@ export class QuizStore {
   protected async replenishQuestions() {
     const newQuestions = await getQuestions({
       questionTypeId: TRUTHY_OR_FALSY_QT_ID,
-      strategyData: { strategy: 'start' },
+      strategyData: { strategy: 'adaptive', userScore: 5 },
     })
 
     runInAction(() => {

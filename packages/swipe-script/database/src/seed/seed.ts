@@ -1,5 +1,5 @@
 import { prisma } from '../client'
-import { generateSeedData } from './generate-seed-data'
+import { generateFunSeedData } from './generate-seed-data'
 
 export const clean = async () => {
   await prisma.answer.deleteMany()
@@ -12,7 +12,7 @@ export const clean = async () => {
 
     if (isSeeded) return
 
-    const { questions, answers, questionTypes } = await generateSeedData()
+    const { questions, answers, questionTypes } = generateFunSeedData()
 
     await clean()
 

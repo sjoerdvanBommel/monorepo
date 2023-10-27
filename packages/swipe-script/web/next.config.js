@@ -16,6 +16,9 @@ const config = {
     serverActions: true,
   },
   reactStrictMode: true,
+  eslint: {
+    dirs: ['app', 'backend', 'components', 'lib', 'providers'],
+  },
 }
 
 export default config

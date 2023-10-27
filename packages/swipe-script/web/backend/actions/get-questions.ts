@@ -1,9 +1,9 @@
 'use server'
 
-import { Question, QuestionType } from '@mr-ss/database'
+import type { Question, QuestionType } from '@mr-ss/database'
 import { adaptiveStrategy } from '../question-selection/strategies/adaptive-strategy'
 import { startStrategy } from '../question-selection/strategies/start-strategy'
-import { StrategyData } from '../types'
+import type { StrategyData } from '../types'
 
 interface Props {
   questionTypeId: QuestionType['id']
@@ -14,9 +14,12 @@ export const getQuestions = async ({
   questionTypeId,
   strategyData,
 }: Props): Promise<Question[]> => {
-  if (strategyData.strategy === 'start') {
-    return startStrategy(questionTypeId)
+  switch (strategyData.strategy) {
+    case 'start':
+      return startStrategy(questionTypeId)
+    case 'adaptive':
+      return adaptiveStrategy(questionTypeId, strategyData)
+    default:
+      return startStrategy(questionTypeId)
   }
-
-  return adaptiveStrategy(questionTypeId, strategyData)
 }

@@ -1,5 +1,6 @@
 import type { Question } from '@mr-ss/database'
-import React, { PropsWithChildren, createContext, useContext } from 'react'
+import type { PropsWithChildren} from 'react';
+import React, { createContext, useContext } from 'react'
 import { QuizStore } from './quiz-store'
 
 const QuizContext = createContext<QuizStore | null>(null)
