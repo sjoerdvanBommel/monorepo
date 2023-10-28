@@ -12,9 +12,6 @@ const config = {
 
     return config
   },
-  experimental: {
-    serverActions: true,
-  },
   reactStrictMode: true,
   eslint: {
     dirs: ['app', 'backend', 'components', 'lib', 'providers'],
