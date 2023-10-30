@@ -83,7 +83,7 @@ export const SwipeCard = observer(
         >
           <Terminal
             lineData={[
-              { type: 'input', prompt: '>', value: question.question_text },
+              { type: 'input', prompt: '>', value: question.questionText },
             ]}
           />
           {/* {question.question_text} */}

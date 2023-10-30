@@ -19,6 +19,7 @@ terraform {
   }
 }
 
+// Providers
 provider "aws" {
   region     = var.AWS_REGION
   access_key = var.AWS_ACCESS_KEY
@@ -40,7 +41,7 @@ provider "vercel" {
   api_token = var.VERCEL_API_TOKEN
 }
 
-// POSTGRES
+// Postgres Database
 resource "aws_security_group" "mr-ss-security-group" {
   name = "mr-ss-security-group"
 
@@ -77,17 +78,42 @@ resource "aws_db_instance" "mr-ss-db-instance" {
   skip_final_snapshot    = true
 }
 
+// S3 bucket
+resource "aws_s3_bucket" "mr-ss-bucket" {
+  bucket                = "mr-ss-bucket-staging"
+}
+
+resource "aws_s3_bucket_versioning" "mr-ss-bucket-versioning" {
+  bucket = aws_s3_bucket.mr-ss-bucket.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+// Vercel project
 resource "vercel_project" "mr-ss_web" {
   name                        = "swipe-script"
   framework                   = "nextjs"
   root_directory              = "packages/swipe-script/web"
   install_command             = "pnpm i"
   serverless_function_region  = "lhr1"
-  environment = [{
-    key                       = "DATABASE_URL"
-    value                     = "postgresql://${var.POSTGRES_USERNAME}:${var.POSTGRES_DB_PASSWORD}@${aws_db_instance.mr-ss-db-instance.endpoint}/${var.POSTGRES_DB_NAME}"
-    target                    = ["preview"]
-  }]
+  environment = [
+    {
+      key                       = "DATABASE_URL"
+      value                     = "postgresql://${var.POSTGRES_USERNAME}:${var.POSTGRES_DB_PASSWORD}@${aws_db_instance.mr-ss-db-instance.endpoint}/${var.POSTGRES_DB_NAME}"
+      target                    = ["preview"]
+    },
+    {
+      key                       = "AWS_BUCKET"
+      value                     = aws_s3_bucket.mr-ss-bucket.bucket
+      target                    = ["preview"]
+    },
+    {
+      key                       = "AWS_REGION"
+      value                     = var.AWS_REGION
+      target                    = ["preview"]
+    }
+  ]
 }
 
 resource "vercel_project_domain" "mr-ss_web-staging-domain" {

@@ -1,18 +1,18 @@
-import type { Question } from '@mr-ss/database'
-import type { PropsWithChildren} from 'react';
+'use client'
+
+import type { QuizWithRelations } from '@mr-ss/database'
+import type { PropsWithChildren } from 'react'
 import React, { createContext, useContext } from 'react'
 import { QuizStore } from './quiz-store'
 
 const QuizContext = createContext<QuizStore | null>(null)
 
 export const QuizProvider: React.FC<
-  PropsWithChildren<{ initialQuestions: Question[] }>
-> = ({ children, initialQuestions }) => {
-  const quizStore = new QuizStore(initialQuestions)
+  PropsWithChildren<{ quiz: QuizWithRelations }>
+> = ({ children, quiz }) => {
+  const store = new QuizStore(quiz)
 
-  return (
-    <QuizContext.Provider value={quizStore}>{children}</QuizContext.Provider>
-  )
+  return <QuizContext.Provider value={store}>{children}</QuizContext.Provider>
 }
 
 export const useQuizStore = (): QuizStore => {

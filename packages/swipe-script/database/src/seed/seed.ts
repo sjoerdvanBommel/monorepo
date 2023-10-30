@@ -5,16 +5,33 @@ export const clean = async () => {
   await prisma.answer.deleteMany()
   await prisma.question.deleteMany()
   await prisma.questionType.deleteMany()
+  await prisma.quiz.deleteMany()
 }
 ;(async () => {
   try {
-    const isSeeded = (await prisma.questionType.count()) > 0
+    const isSeeded = (await prisma.quiz.count()) > 0
 
     if (isSeeded) return
 
-    const { questions, answers, questionTypes } = generateFunSeedData()
+    const { questions, answers, questionTypes, quizzes } = generateFunSeedData()
 
     await clean()
+
+    await Promise.all(
+      quizzes.map((quiz) =>
+        prisma.quiz.upsert({
+          where: {
+            slug: quiz.slug,
+          },
+          update: {
+            ...quiz,
+          },
+          create: {
+            ...quiz,
+          },
+        }),
+      ),
+    )
 
     await Promise.all(
       questionTypes.map((questionType) =>

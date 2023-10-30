@@ -11,9 +11,9 @@ export function getAnswerId(question: Question, validAnswer: ValidAnswer) {
   if (typeof validAnswer === 'number') return validAnswer
 
   if (validAnswer === 'left') {
-    return question.answers?.find((x) => x.answer_text === 'Falsy')?.id
+    return question.answers?.find((x) => x.answerText === 'Falsy')?.id
   } else if (validAnswer === 'right') {
-    return question.answers?.find((x) => x.answer_text === 'Truthy')?.id
+    return question.answers?.find((x) => x.answerText === 'Truthy')?.id
   }
 }
 

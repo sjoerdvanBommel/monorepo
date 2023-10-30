@@ -31,7 +31,9 @@ export default function RootLayout({
       <body
         className={`w-full h-full ${titanOne.variable} ${fredoka.variable} ${consolas.variable}`}
       >
-        <div className="w-full h-full relative overflow-hidden">{children}</div>
+        <div className="w-full h-full relative overflow-hidden p-2">
+          {children}
+        </div>
       </body>
     </html>
   )

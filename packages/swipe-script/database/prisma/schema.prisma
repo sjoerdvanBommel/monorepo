@@ -7,25 +7,43 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum DifficultyLevel {
+  NO_EXPERIENCE
+  BEGINNER
+  JUNIOR_DEVELOPER
+  MEDIOR_DEVELOPER
+  SENIOR_DEVELOPER
+  TECH_LEAD
+}
+
 model Question {
   id                    Int                 @id @default(autoincrement())
-  question_text         String
-  difficulty_level      Int
-  question_type_id      Int
-  question_type         QuestionType        @relation(fields: [question_type_id], references: [id])
+  questionText          String              @map("question_text")
+  questionTypeId        Int                 @map("question_type_id")
+  questionType          QuestionType        @relation(fields: [questionTypeId], references: [id])
   answers               Answer[]
+  quizSlug              String              @map("quiz_slug")
+  quiz                  Quiz                @relation(fields: [quizSlug], references: [slug])
 }
 
 model QuestionType {
   id                    Int                 @id @default(autoincrement())
-  type_name             String
+  typeName              String              @map("type_name")
   questions             Question[]
 }
 
 model Answer {
   id                    Int                 @id @default(autoincrement())
-  answer_text           String
-  is_correct            Boolean
-  question_id           Int
-  question              Question            @relation(fields: [question_id], references: [id])
+  answerText            String              @map("answer_text")
+  isCorrect             Boolean             @map("is_correct")
+  questionId            Int                 @map("question_id")
+  question              Question            @relation(fields: [questionId], references: [id])
+}
+
+model Quiz {
+  slug                  String              @id
+  title                 String
+  imageKey              String?             @map("image_key")
+  difficultyLevels      DifficultyLevel[]   @map("difficulty_levels")
+  questions             Question[]
 }

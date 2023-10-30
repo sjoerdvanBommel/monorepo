@@ -1,4 +1,3 @@
-export type StartStrategyData = { strategy: 'start' }
-export type AdaptiveStrategyData = { strategy: 'adaptive'; userScore: number }
+export type DefaultStrategyData = { strategy: 'default' }
 
-export type StrategyData = StartStrategyData | AdaptiveStrategyData
+export type StrategyData = DefaultStrategyData

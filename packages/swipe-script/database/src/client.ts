@@ -1,10 +1,10 @@
 import type { Simplify } from '@mr/utils'
 import type {
   Prisma,
-  Question as PrismaQuestion} from '@prisma/client';
-import {
-  PrismaClient
+  Question as PrismaQuestion,
+  Quiz as PrismaQuiz,
 } from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
 
 const prismaClientSingleton = () => {
   if (process.env.NODE_ENV === 'production') {
@@ -32,10 +32,18 @@ export const prisma = globalForPrisma.prisma ?? prismaClientSingleton()
 
 export * from '@prisma/client'
 
-export type QuestionWithAnswers = Simplify<
+export type QuestionWithoutRelations = PrismaQuestion
+export type QuestionWithRelations = Simplify<
   Prisma.QuestionGetPayload<{
     include: { answers: true }
   }>
 >
+export type Question = Simplify<PrismaQuestion & Partial<QuestionWithRelations>>
 
-export type Question = Simplify<PrismaQuestion & Partial<QuestionWithAnswers>>
+export type QuizWithoutRelations = PrismaQuiz
+export type QuizWithRelations = Simplify<
+  Prisma.QuizGetPayload<{
+    include: { questions: { include: { answers: true } } }
+  }>
+>
+export type Quiz = Simplify<PrismaQuiz & Partial<QuizWithRelations>>

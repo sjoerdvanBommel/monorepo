@@ -14,7 +14,10 @@ export const TruthyOrFalsy = () => {
           animate={{ left: 0, opacity: 1 }}
           transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }}
         >
-          <ArrowLongIcon className="rotate-180 text-white-accent w-12 from-success to-transparent scale-x-125" />
+          <ArrowLongIcon
+            gradientId="success-arrow"
+            className="rotate-180 text-white-accent w-12 from-success to-transparent scale-x-125"
+          />
         </motion.div>
       </div>
       <span className="font-heading text-2xl opacity-0 animate-appear animation-delay-200 animation-duration-700 drop-shadow-white">
@@ -27,7 +30,10 @@ export const TruthyOrFalsy = () => {
           animate={{ right: 0, opacity: 1 }}
           transition={{ delay: 0.5, duration: 1, ease: 'easeInOut' }}
         >
-          <ArrowLongIcon className="text-white-accent w-12 mb-1 from-error to-transparent scale-x-125" />
+          <ArrowLongIcon
+            gradientId="error-arrow"
+            className="text-white-accent w-12 mb-1 from-error to-transparent scale-x-125"
+          />
         </motion.div>
         <span className="font-heading text-5xl leading-tight -mt-2 drop-shadow-white">
           Falsy?
