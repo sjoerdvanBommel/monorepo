@@ -14,47 +14,22 @@ export default async function QuizzesPage() {
       <h1 className="text-center m-6 text-2xl">
         What do you want to learn today?
       </h1>
-      <div className="grid grid-cols-2 gap-2 aspect-square">
+      <div className="grid grid-cols-2 gap-2">
         {quizzes.map((quiz) => (
           <Link
             className={cn(
               buttonVariants({ variant: 'outline' }),
-              'h-full text-lg whitespace-pre-wrap text-center bg-cover',
+              'h-full text-lg whitespace-pre-wrap text-center aspect-square bg-cover',
             )}
             key={quiz.slug}
             style={{
-              backgroundImage: `https://${NEXT_PUBLIC_AWS_BUCKET}.s3.${NEXT_PUBLIC_AWS_REGION}.amazonaws.com/${quiz.imageKey}`,
+              backgroundImage: quiz.imageKey
+                ? `url(https://${NEXT_PUBLIC_AWS_BUCKET}.s3.${NEXT_PUBLIC_AWS_REGION}.amazonaws.com/${quiz.imageKey})`
+                : '',
             }}
             href={`/quizzes/${quiz.slug}`}
           >
-            {quiz.title}
-          </Link>
-        ))}
-        {quizzes.map((quiz) => (
-          <Link
-            className={cn(buttonVariants({ variant: 'outline' }), 'h-full')}
-            href={`/quizzes/${quiz.slug}`}
-            key={quiz.slug}
-          >
-            {quiz.title}
-          </Link>
-        ))}
-        {quizzes.map((quiz) => (
-          <Link
-            className={cn(buttonVariants({ variant: 'outline' }), 'h-full')}
-            href={`/quizzes/${quiz.slug}`}
-            key={quiz.slug}
-          >
-            {quiz.title}
-          </Link>
-        ))}
-        {quizzes.map((quiz) => (
-          <Link
-            className={cn(buttonVariants({ variant: 'outline' }), 'h-full')}
-            href={`/quizzes/${quiz.slug}`}
-            key={quiz.slug}
-          >
-            {quiz.title}
+            {quiz.imageKey ? '' : quiz.title}
           </Link>
         ))}
       </div>

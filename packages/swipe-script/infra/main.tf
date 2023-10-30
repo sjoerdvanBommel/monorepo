@@ -90,6 +90,54 @@ resource "aws_s3_bucket_versioning" "mr-ss-bucket-versioning" {
   }
 }
 
+resource "aws_s3_bucket_ownership_controls" "mr-ss-bucket-ownership-controls" {
+  bucket = aws_s3_bucket.mr-ss-bucket.id
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "mr-ss-bucket-public-access" {
+  bucket = aws_s3_bucket.mr-ss-bucket.id
+
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
+}
+
+resource "aws_s3_bucket_acl" "mr-ss-bucket-acl" {
+  depends_on = [
+    aws_s3_bucket_ownership_controls.mr-ss-bucket-ownership-controls,
+    aws_s3_bucket_public_access_block.mr-ss-bucket-public-access,
+  ]
+
+  bucket = aws_s3_bucket.mr-ss-bucket.id
+  acl    = "public-read"
+}
+
+data "aws_iam_policy_document" "allow_public_read_access" {
+  statement {
+    principals {
+      type            = "*"
+      identifiers     = ["*"]
+    }
+    effect            = "Allow"
+    actions = [
+                        "s3:GetObject",
+    ]
+    resources = [
+                        aws_s3_bucket.mr-ss-bucket.arn,
+                        "${aws_s3_bucket.mr-ss-bucket.arn}/*",
+    ]
+  }
+}
+
+resource "aws_s3_bucket_policy" "allow_public_read_access" {
+  bucket = aws_s3_bucket.mr-ss-bucket.id
+  policy = data.aws_iam_policy_document.allow_public_read_access.json
+}
+
 // Vercel project
 resource "vercel_project" "mr-ss_web" {
   name                        = "swipe-script"
