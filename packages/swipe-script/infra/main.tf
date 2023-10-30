@@ -31,7 +31,7 @@ provider "postgresql" {
   port            = var.POSTGRES_PORT
   database        = var.POSTGRES_DB_NAME
   username        = var.POSTGRES_USERNAME
-  password        = var.POSTGRES_DB_PASSWORD
+  password        = var.POSTGRES_PASSWORD
   sslmode         = "require"
   connect_timeout = 15
   superuser       = false
@@ -71,7 +71,7 @@ resource "aws_db_instance" "mr-ss-db-instance" {
   identifier             = var.POSTGRES_IDENTIFIER
   db_name                = var.POSTGRES_DB_INSTANCE_NAME
   username               = var.POSTGRES_USERNAME
-  password               = var.POSTGRES_DB_PASSWORD
+  password               = var.POSTGRES_PASSWORD
   publicly_accessible    = true
   parameter_group_name   = "default.postgres12"
   vpc_security_group_ids = [aws_security_group.mr-ss-security-group.id]
@@ -148,16 +148,16 @@ resource "vercel_project" "mr-ss_web" {
   environment = [
     {
       key                       = "DATABASE_URL"
-      value                     = "postgresql://${var.POSTGRES_USERNAME}:${var.POSTGRES_DB_PASSWORD}@${aws_db_instance.mr-ss-db-instance.endpoint}/${var.POSTGRES_DB_NAME}"
+      value                     = "postgresql://${var.POSTGRES_USERNAME}:${var.POSTGRES_PASSWORD}@${aws_db_instance.mr-ss-db-instance.endpoint}/${var.POSTGRES_DB_NAME}"
       target                    = ["preview"]
     },
     {
-      key                       = "AWS_BUCKET"
+      key                       = "NEXT_PUBLIC_AWS_BUCKET"
       value                     = aws_s3_bucket.mr-ss-bucket.bucket
       target                    = ["preview"]
     },
     {
-      key                       = "AWS_REGION"
+      key                       = "NEXT_PUBLIC_AWS_REGION"
       value                     = var.AWS_REGION
       target                    = ["preview"]
     }

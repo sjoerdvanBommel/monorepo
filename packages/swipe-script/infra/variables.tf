@@ -3,7 +3,7 @@ variable AWS_ACCESS_KEY {}
 variable AWS_SECRET_KEY {}
 variable POSTGRES_PORT {}
 variable POSTGRES_DB_NAME {}
-variable POSTGRES_DB_PASSWORD {}
+variable POSTGRES_PASSWORD {}
 variable POSTGRES_USERNAME {}
 variable POSTGRES_USER_PASSWORD {}
 variable POSTGRES_IDENTIFIER {}
