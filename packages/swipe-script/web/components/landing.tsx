@@ -10,7 +10,7 @@ export const Landing = () => {
   const [startingSoon, setStartingSoon] = useState(false)
 
   return (
-    <div className="w-full min-h-full overflow-hidden relative">
+    <div className="w-full min-h-full relative">
       <div
         className={twMerge(
           'transition-opacity duration-500',
@@ -22,7 +22,7 @@ export const Landing = () => {
 
       <div
         className={twMerge(
-          'flex flex-col justify-center text-center mt-12 sm:mt-16 lg:mt-20',
+          'flex flex-col justify-center text-center pt-12 sm:pt-16 lg:pt-20',
           startingSoon && 'animate-fade-up animation-duration-500',
         )}
       >

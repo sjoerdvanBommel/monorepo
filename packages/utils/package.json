@@ -3,9 +3,20 @@
   "version": "1.0.0",
   "license": "MIT",
   "private": true,
-  "types": "types.ts",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist"
+  },
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
   "devDependencies": {
-    "@mr/config": "workspace:*"
+    "@mr/config": "workspace:*",
+    "tsup": "^7.2.0"
   },
   "type": "module"
 }

@@ -1,7 +1,9 @@
 {
   "extends": "@mr/config/tsconfig/node20.json",
   "compilerOptions": {
-    "declaration": true
+    "declaration": true,
+    "module": "ESNext",
+    "moduleResolution": "Node"
   },
   "include": ["**/*.ts"]
 }
