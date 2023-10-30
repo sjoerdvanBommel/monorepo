@@ -2,12 +2,22 @@
   "name": "@mr/config",
   "version": "1.0.0",
   "license": "MIT",
+  "exports": {
+    "./eslint/*": "./eslint/*",
+    "./prettier/*": "./prettier/*",
+    "./tsconfig/*": "./tsconfig/*",
+    ".": "./dist/index.js"
+  },
   "files": [
     "eslint",
     "prettier",
     "tsconfig",
     "tsup"
   ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
   "type": "module",
   "devDependencies": {
     "@types/node": "^20.8.7",

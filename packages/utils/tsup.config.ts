@@ -1,4 +1,4 @@
-import { options } from '@mr/config/tsup/node.js'
+import { config } from '@mr/config'
 import { defineConfig } from 'tsup'
 
-export default defineConfig(options)
+export default defineConfig(config)
