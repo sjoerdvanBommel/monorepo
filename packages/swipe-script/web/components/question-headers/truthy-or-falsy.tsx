@@ -3,7 +3,7 @@ import { ArrowLongIcon } from '../icons/arrow-long-icon'
 
 export const TruthyOrFalsy = () => {
   return (
-    <div className="flex flex-col items-center mt-8">
+    <div className="flex flex-col items-center my-8">
       <div className="flex gap-4 items-end opacity-0 animate-appear animation-duration-1000">
         <span className="font-heading text-5xl leading-tight -mb-2 drop-shadow-white">
           Truthy

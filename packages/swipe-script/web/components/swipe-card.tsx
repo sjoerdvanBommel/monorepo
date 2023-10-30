@@ -86,7 +86,6 @@ export const SwipeCard = observer(
               { type: 'input', prompt: '>', value: question.questionText },
             ]}
           />
-          {/* {question.question_text} */}
         </motion.div>
       </div>
     )

@@ -17,6 +17,9 @@ const prismaClientSingleton = () => {
   client.$on('query', (e) => {
     console.log(`${e.query} ${e.params}`)
   })
+
+  globalForPrisma.prisma = client
+
   return client
 }
 

@@ -52,14 +52,19 @@ const QuizProgress = observer(() => {
   return (
     <ProgressPrimitive.Root
       ref={progressContainerRef}
-      className="relative h-8 shrink-0 rounded-md w-full border border-border overflow-hidden"
+      className="relative h-8 shrink-0 w-full border border-border rounded-md overflow-hidden"
     >
-      <ProgressPrimitive.Indicator
-        className="absolute h-full w-full flex-1 bg-gradient-to-br from-success-900 to-success-700 transition-all origin-left"
-        style={{
-          transform: `scaleX(${correctAnswers / (100 / nQuestions)})`,
-        }}
-      />
+      <div className="absolute w-full h-full rounded-md blur-[1px]">
+        <ProgressPrimitive.Indicator
+          className="absolute h-full w-full flex-1 bg-gradient-to-r from-secondary to-primary transition-all origin-left"
+          style={{
+            left: `${
+              (correctAnswers > 0 ? -100 : -110) +
+              (correctAnswers / nQuestions) * 100
+            }%`,
+          }}
+        />
+      </div>
     </ProgressPrimitive.Root>
   )
 })
