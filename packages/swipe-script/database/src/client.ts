@@ -1,6 +1,8 @@
 import type { Simplify } from '@mr/utils'
 import type {
   Prisma,
+  Course as PrismaCourse,
+  CourseSection as PrismaCourseSection,
   Question as PrismaQuestion,
   Quiz as PrismaQuiz,
 } from '@prisma/client'
@@ -50,3 +52,19 @@ export type QuizWithRelations = Simplify<
   }>
 >
 export type Quiz = Simplify<PrismaQuiz & Partial<QuizWithRelations>>
+
+export type CourseWithoutRelations = PrismaCourse
+export type CourseWithRelations = Simplify<
+  Prisma.CourseGetPayload<{
+    include: { sections: true }
+  }>
+>
+export type Course = Simplify<PrismaCourse & Partial<CourseWithRelations>>
+
+export type CourseSectionWithoutRelations = PrismaCourseSection
+export type CourseSectionWithRelations = Prisma.CourseSectionGetPayload<{
+  include: { quizzes: true }
+}>
+
+export type CourseSection = PrismaCourseSection &
+  Partial<CourseSectionWithRelations>

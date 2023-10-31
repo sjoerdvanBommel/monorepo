@@ -1,5 +1,14 @@
 import { prisma } from '../client'
-import { clean } from './seed'
+
+export const clean = async () => {
+  await prisma.answer.deleteMany()
+  await prisma.answer.deleteMany()
+  await prisma.question.deleteMany()
+  await prisma.questionType.deleteMany()
+  await prisma.quiz.deleteMany()
+  await prisma.courseSection.deleteMany()
+  await prisma.course.deleteMany()
+}
 
 try {
   await clean()

@@ -1,27 +1,54 @@
 import { prisma } from '../client'
+import { clean } from './clean'
 import { generateFunSeedData } from './generate-seed-data'
-
-export const clean = async () => {
-  await prisma.answer.deleteMany()
-  await prisma.question.deleteMany()
-  await prisma.questionType.deleteMany()
-  await prisma.quiz.deleteMany()
-}
 ;(async () => {
   try {
-    const isSeeded = (await prisma.quiz.count()) > 0
+    // const isSeeded = (await prisma.quiz.count()) > 0
 
-    if (isSeeded) return
+    // if (isSeeded) return
 
-    const { questions, answers, questionTypes, quizzes } = generateFunSeedData()
+    const { questions, answers, questionTypes, quizzes, courses, sections } =
+      generateFunSeedData()
 
     await clean()
+
+    await Promise.all(
+      courses.map((x) =>
+        prisma.course.upsert({
+          where: {
+            id: x.id,
+          },
+          update: {
+            ...x,
+          },
+          create: {
+            ...x,
+          },
+        }),
+      ),
+    )
+
+    await Promise.all(
+      sections.map((x) =>
+        prisma.courseSection.upsert({
+          where: {
+            id: x.id,
+          },
+          update: {
+            ...x,
+          },
+          create: {
+            ...x,
+          },
+        }),
+      ),
+    )
 
     await Promise.all(
       quizzes.map((quiz) =>
         prisma.quiz.upsert({
           where: {
-            slug: quiz.slug,
+            id: quiz.id,
           },
           update: {
             ...quiz,

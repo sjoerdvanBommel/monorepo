@@ -1,36 +1,50 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env*"],
-  "globalEnv": ["NODE_ENV", "NEXT_PUBLIC_AWS_BUCKET", "NEXT_PUBLIC_AWS_REGION"],
+  "globalEnv": ["NODE_ENV"],
+  "globalDotEnv": [".env"],
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"],
+      "env": ["DATABASE_URL"]
     },
     "db:migrate:dev": {
       "dependsOn": ["db:generate"],
-      "cache": false
+      "cache": false,
+      "env": ["DATABASE_URL"]
     },
     "db:migrate:deploy": {
-      "cache": false
+      "cache": false,
+      "env": ["DATABASE_URL"]
     },
     "db:push": {
       "dependsOn": ["db:generate"],
-      "cache": false
+      "cache": false,
+      "env": ["DATABASE_URL"]
     },
-    "db:seed": { "cache": false },
-    "db:clean": { "cache": false },
+    "db:seed": { "cache": false, "env": ["DATABASE_URL"] },
+    "db:clean": { "cache": false, "env": ["DATABASE_URL"] },
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "env": ["DATABASE_URL"]
     },
     "db:generate": {
-      "cache": false
+      "cache": false,
+      "env": ["DATABASE_URL"]
     },
     "lint": {},
     "lint:fix": {},
     "docker-compose": {
-      "cache": false
+      "cache": false,
+      "env": [
+        "POSTGRES_DB",
+        "POSTGRES_USER",
+        "POSTGRES_PASSWORD",
+        "POSTGRES_HOST",
+        "POSTGRES_PORT"
+      ]
     },
     "clean": {},
     "terraform:init": {},

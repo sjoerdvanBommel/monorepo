@@ -91,7 +91,7 @@ export const Landing = () => {
       >
         <AnimatedLink
           className="block text-center bg-gradient-to-br from-primary to-secondary rounded-xl w-full p-0.5"
-          href={'/quizzes'}
+          href={'/courses'}
           onClick={() => {
             setStartingSoon(true)
           }}

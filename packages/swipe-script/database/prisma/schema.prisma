@@ -22,8 +22,8 @@ model Question {
   questionTypeId        Int                 @map("question_type_id")
   questionType          QuestionType        @relation(fields: [questionTypeId], references: [id])
   answers               Answer[]
-  quizSlug              String              @map("quiz_slug")
-  quiz                  Quiz                @relation(fields: [quizSlug], references: [slug])
+  quizId                Int                 @map("quiz_id")
+  quiz                  Quiz                @relation(fields: [quizId], references: [id])
 }
 
 model QuestionType {
@@ -41,9 +41,35 @@ model Answer {
 }
 
 model Quiz {
-  slug                  String              @id
+  id                    Int                 @id @default(autoincrement())
+  slug                  String              
   title                 String
-  imageKey              String?             @map("image_key")
+  imageUrl              String?             @map("image_url")
   difficultyLevels      DifficultyLevel[]   @map("difficulty_levels")
   questions             Question[]
+  sectionId             Int                 @map("section_id")
+  sections              CourseSection       @relation("SectionToQuiz", fields: [sectionId], references: [id])
+
+  @@unique([slug, sectionId], name: "UniqueSlugPerSection")
+}
+
+model Course {
+  id                    Int                 @id @default(autoincrement())
+  slug                  String              @unique
+  title                 String
+  description           String?
+  imageUrl              String?             @map("image_url")
+  sections              CourseSection[]     @relation("CourseToSection")
+}
+
+model CourseSection {
+  id                    Int                 @id @default(autoincrement())
+  slug                  String              
+  title                 String                
+  content               String                
+  courseId              Int                 @map("course_id")
+  course                Course              @relation("CourseToSection", fields: [courseId], references: [id])
+  quizzes               Quiz[]              @relation("SectionToQuiz")
+  
+  @@unique([slug, courseId], name: "UniqueSlugPerCourse")
 }

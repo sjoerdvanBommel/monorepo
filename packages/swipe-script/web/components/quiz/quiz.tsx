@@ -104,7 +104,7 @@ export const Quiz = observer(() => {
             {quizStore.currentQuestionNumber} questions correct. Great work!
           </span>
           <Link
-            href="/quizzes"
+            href="/courses"
             className={buttonVariants({ variant: 'outline' })}
           >
             Go back

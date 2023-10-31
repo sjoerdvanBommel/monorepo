@@ -1,23 +1,38 @@
 'use server'
 
-import { prisma, type Quiz, type QuizWithRelations } from '@mr-ss/database'
-import { defaultStrategy } from '../question-selection/strategies/default-strategy'
-import type { StrategyData } from '../types'
+import {
+  prisma,
+  type Course,
+  type CourseSection,
+  type Quiz,
+  type QuizWithRelations,
+} from '@mr-ss/database'
 
 interface Props {
-  slug: Quiz['slug']
-  /** Can be used at some point to influence the question selection strategy */
-  strategyData?: StrategyData
+  courseSlug: Course['slug']
+  courseSectionSlug: CourseSection['slug']
+  quizSlug: Quiz['slug']
 }
 
 export const getQuiz = async ({
-  slug,
-  strategyData,
+  courseSlug,
+  courseSectionSlug,
+  quizSlug,
 }: Props): Promise<QuizWithRelations | undefined> => {
-  switch (strategyData?.strategy) {
-    default:
-      return defaultStrategy(slug)
-  }
+  const quiz = await prisma.quiz.findFirst({
+    where: {
+      slug: quizSlug,
+      AND: {
+        sections: {
+          slug: courseSectionSlug,
+          AND: { course: { slug: courseSlug } },
+        },
+      },
+    },
+    include: { questions: { include: { answers: true } } },
+  })
+
+  return quiz ?? undefined
 }
 
 export const getQuizzes = async () => {

@@ -153,6 +153,7 @@ const config: Config = {
         },
       )
     }),
+    require('tailwindcss-animate'),
   ],
 }
 

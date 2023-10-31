@@ -1,33 +1,41 @@
+import slugify from 'slugify'
 import type {
   Answer,
-  Prisma,
-  Question,
+  CourseSection,
+  CourseWithoutRelations,
   QuestionType,
   QuestionWithoutRelations,
+  Quiz,
 } from '../client'
 
-interface Situation {
-  label: string
-  difficulty_level: number
-}
-
-const situations: Situation[] = [
-  { label: 'true', difficulty_level: 1 },
-  { label: 'false', difficulty_level: 1 },
-  { label: '0', difficulty_level: 2 },
-  { label: "''", difficulty_level: 3 },
-  { label: 'null', difficulty_level: 2 },
-  { label: 'undefined', difficulty_level: 2 },
-  { label: 'NaN', difficulty_level: 4 },
-  { label: 'Infinity', difficulty_level: 4 },
-  { label: '[]', difficulty_level: 3 },
-  { label: '{}', difficulty_level: 3 },
-  { label: 'Symbol()', difficulty_level: 4 },
-  { label: "Symbol('foo')", difficulty_level: 4 },
-]
+const JAVASCRIPT_COURSE_ID = 1
+const JAVASCRIPT_COURSE_TITLE = 'The Interactive JavaScript Journey'
+const JAVASCRIPT_COURSE_SLUG = slugify(JAVASCRIPT_COURSE_TITLE, { lower: true })
 
 const TRUTHY_OR_FALSY_QT_ID = 1
-const TRUTHY_OR_FALSY_QUIZ_SLUG = 'truthy-or-falsy'
+const TRUTHY_OR_FALSY_QUIZ_ID = 1
+const TRUTHY_OR_FALSY_QUIZ_TITLE = 'JavaScript: Truthy or Falsy?'
+const TRUTHY_OR_FALSY_QUIZ_SLUG = slugify(TRUTHY_OR_FALSY_QUIZ_TITLE, {
+  lower: true,
+})
+
+const INTRODUCTION_SECTION_ID = 1
+const TRUTHY_OR_FALSY_SECTION_ID = 2
+
+const AWS_BUCKET = process.env.AWS_BUCKET!
+const AWS_REGION = process.env.AWS_REGION!
+
+export const courses: readonly CourseWithoutRelations[] = [
+  {
+    id: JAVASCRIPT_COURSE_ID,
+    slug: JAVASCRIPT_COURSE_SLUG,
+    title: JAVASCRIPT_COURSE_TITLE,
+    description:
+      'JavaScript is big. Almost every developer has been in touch with JavaScript at some point in their career. Mastering it is therefore a very useful skill. This interactive course will adapt to your experience level and provide you hands-on challenges, dynamic exercises, and expert guidance!',
+    imageUrl:
+      'https://mr-ss-bucket-staging.s3.eu-west-2.amazonaws.com/javascript+logo.png',
+  },
+]
 
 export const questionTypes: readonly QuestionType[] = [
   {
@@ -36,17 +44,42 @@ export const questionTypes: readonly QuestionType[] = [
   },
 ] as const
 
-export const quizzes: readonly Prisma.QuizCreateInput[] = [
+export const quizzes: readonly Omit<Quiz, 'questions'>[] = [
   {
+    id: TRUTHY_OR_FALSY_QUIZ_ID,
     slug: TRUTHY_OR_FALSY_QUIZ_SLUG,
-    title: 'JavaScript: Truthy or Falsy?',
+    title: TRUTHY_OR_FALSY_QUIZ_TITLE,
     difficultyLevels: [
       'JUNIOR_DEVELOPER',
       'MEDIOR_DEVELOPER',
       'SENIOR_DEVELOPER',
       'TECH_LEAD',
     ],
-    imageKey: 'truthy-or-falsy.png',
+    imageUrl: `https://${AWS_BUCKET}.s3.${AWS_REGION}.amazonaws.com/truthy-or-falsy.png`,
+    sectionId: TRUTHY_OR_FALSY_SECTION_ID,
+  },
+]
+
+const introductionTitle = 'Introduction'
+const truthyOrFalsyTitle = 'Truthy or Falsy?'
+export const sections: readonly Omit<CourseSection, 'quizzes'>[] = [
+  {
+    id: INTRODUCTION_SECTION_ID,
+    slug: slugify(introductionTitle, { lower: true }),
+    title: introductionTitle,
+    courseId: JAVASCRIPT_COURSE_ID,
+    content: `
+      # JavaScript Introduction
+
+      TODO JavaScript introduction
+    `,
+  },
+  {
+    id: TRUTHY_OR_FALSY_SECTION_ID,
+    slug: slugify(truthyOrFalsyTitle, { lower: true }),
+    title: truthyOrFalsyTitle,
+    content: 'Truthy and falsy are JavaScript concepts that...',
+    courseId: JAVASCRIPT_COURSE_ID,
   },
 ]
 
@@ -77,7 +110,7 @@ export const generateFunSeedData = () => {
         id: currentQuestionId++,
         questionText: question,
         questionTypeId: TRUTHY_OR_FALSY_QT_ID,
-        quizSlug: TRUTHY_OR_FALSY_QUIZ_SLUG,
+        quizId: TRUTHY_OR_FALSY_QUIZ_ID,
       })
     } catch (e) {
       console.log('question', question, 'failed')
@@ -194,12 +227,33 @@ export const generateFunSeedData = () => {
     `-0 + "" === "-0"`,
     `Number("0O0") === 0`,
     `String([null]) === "null"`,
-    `String(Symbol("I\'m unique!")) === 'Symbol(I\'m unique!)'`,
     `isNaN({} + {})`,
   ])
 
-  return { questionTypes, questions, answers, quizzes }
+  return { questionTypes, questions, answers, quizzes, courses, sections }
 }
+
+/**
+
+interface Situation {
+  label: string
+  difficulty_level: number
+}
+
+const situations: Situation[] = [
+  { label: 'true', difficulty_level: 1 },
+  { label: 'false', difficulty_level: 1 },
+  { label: '0', difficulty_level: 2 },
+  { label: "''", difficulty_level: 3 },
+  { label: 'null', difficulty_level: 2 },
+  { label: 'undefined', difficulty_level: 2 },
+  { label: 'NaN', difficulty_level: 4 },
+  { label: 'Infinity', difficulty_level: 4 },
+  { label: '[]', difficulty_level: 3 },
+  { label: '{}', difficulty_level: 3 },
+  { label: 'Symbol()', difficulty_level: 4 },
+  { label: "Symbol('foo')", difficulty_level: 4 },
+]
 
 export const generateSeedData = () => {
   const questions: Omit<Question, 'answers'>[] = []
@@ -266,3 +320,5 @@ export const generateSeedData = () => {
     questionTypes,
   }
 }
+
+*/
