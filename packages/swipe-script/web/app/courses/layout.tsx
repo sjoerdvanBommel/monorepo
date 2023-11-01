@@ -12,7 +12,7 @@ import {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <header className="-m-2 h-16 border-b border-border flex justify-between items-center px-4">
+      <header className="-mx-2 -mt-2 h-16 border-b border-border flex justify-between items-center px-4 py-4">
         <Sheet>
           <SheetTrigger>
             <HamburgerMenuIcon className="text-3xl relative text-white-accent" />

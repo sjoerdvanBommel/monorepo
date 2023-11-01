@@ -5,6 +5,7 @@ import plugin from 'tailwindcss/plugin'
 // Workaround for framer motion which does not accept CSS variables for animations
 export const framerColors = {
   'black-accent': 'hsl(240 10% 4%)',
+  'white-accent': 'hsl(240 7% 95%)',
   'success-900': 'hsl(120 92% 6%)',
   'error-900': 'hsl(349 94% 10%)',
   border: 'hsl(240 3.7% 15.9%)',
@@ -75,7 +76,7 @@ const config: Config = {
     colors: {
       transparent: 'transparent',
       'black-accent': framerColors['black-accent'],
-      'white-accent': 'var(--white-accent)',
+      'white-accent': framerColors['white-accent'],
       success: {
         900: framerColors['success-900'],
         700: 'var(--success-700)',

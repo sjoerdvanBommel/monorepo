@@ -62,6 +62,9 @@ export const quizzes: readonly Omit<Quiz, 'questions'>[] = [
 
 const introductionTitle = 'Introduction'
 const truthyOrFalsyTitle = 'Truthy or Falsy?'
+const declaringVariablesTitle = 'Declaring variables'
+const arraysTitle = 'Arrays'
+
 export const sections: readonly Omit<CourseSection, 'quizzes'>[] = [
   {
     id: INTRODUCTION_SECTION_ID,
@@ -80,6 +83,28 @@ export const sections: readonly Omit<CourseSection, 'quizzes'>[] = [
     title: truthyOrFalsyTitle,
     content: 'Truthy and falsy are JavaScript concepts that...',
     courseId: JAVASCRIPT_COURSE_ID,
+  },
+  {
+    id: 3,
+    slug: slugify(declaringVariablesTitle, { lower: true }),
+    title: declaringVariablesTitle,
+    courseId: JAVASCRIPT_COURSE_ID,
+    content: `
+      # Declaring variables
+
+      TODO Declaring variables
+    `,
+  },
+  {
+    id: 4,
+    slug: slugify(arraysTitle, { lower: true }),
+    title: arraysTitle,
+    courseId: JAVASCRIPT_COURSE_ID,
+    content: `
+      # Arrays
+
+      TODO Arrays
+    `,
   },
 ]
 
