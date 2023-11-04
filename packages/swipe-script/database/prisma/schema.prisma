@@ -66,10 +66,12 @@ model CourseSection {
   id                    Int                 @id @default(autoincrement())
   slug                  String              
   title                 String                
-  content               String                
+  content               String              
+  order                 Int                 @default(autoincrement())
   courseId              Int                 @map("course_id")
   course                Course              @relation("CourseToSection", fields: [courseId], references: [id])
   quizzes               Quiz[]              @relation("SectionToQuiz")
   
   @@unique([slug, courseId], name: "UniqueSlugPerCourse")
+  @@unique([id, order], name: "UniqueOrderPerCourseSection")
 }

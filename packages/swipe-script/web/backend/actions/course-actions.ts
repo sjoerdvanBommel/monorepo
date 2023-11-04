@@ -7,7 +7,9 @@ export const getCourse = async (
 ): Promise<CourseWithRelations | undefined> => {
   const course = await prisma.course.findFirst({
     where: { slug },
-    include: { sections: { include: { quizzes: true } } },
+    include: {
+      sections: { include: { quizzes: true }, orderBy: { order: 'asc' } },
+    },
   })
 
   if (!course) return undefined

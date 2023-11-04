@@ -20,7 +20,7 @@ const TRUTHY_OR_FALSY_QUIZ_SLUG = slugify(TRUTHY_OR_FALSY_QUIZ_TITLE, {
 })
 
 const INTRODUCTION_SECTION_ID = 1
-const TRUTHY_OR_FALSY_SECTION_ID = 2
+const TRUTHY_OR_FALSY_SECTION_ID = 4
 
 const AWS_BUCKET = process.env.AWS_BUCKET!
 const AWS_REGION = process.env.AWS_REGION!
@@ -78,14 +78,7 @@ export const sections: readonly Omit<CourseSection, 'quizzes'>[] = [
     `,
   },
   {
-    id: TRUTHY_OR_FALSY_SECTION_ID,
-    slug: slugify(truthyOrFalsyTitle, { lower: true }),
-    title: truthyOrFalsyTitle,
-    content: 'Truthy and falsy are JavaScript concepts that...',
-    courseId: JAVASCRIPT_COURSE_ID,
-  },
-  {
-    id: 3,
+    id: 2,
     slug: slugify(declaringVariablesTitle, { lower: true }),
     title: declaringVariablesTitle,
     courseId: JAVASCRIPT_COURSE_ID,
@@ -96,7 +89,7 @@ export const sections: readonly Omit<CourseSection, 'quizzes'>[] = [
     `,
   },
   {
-    id: 4,
+    id: 3,
     slug: slugify(arraysTitle, { lower: true }),
     title: arraysTitle,
     courseId: JAVASCRIPT_COURSE_ID,
@@ -106,7 +99,14 @@ export const sections: readonly Omit<CourseSection, 'quizzes'>[] = [
       TODO Arrays
     `,
   },
-]
+  {
+    id: TRUTHY_OR_FALSY_SECTION_ID,
+    slug: slugify(truthyOrFalsyTitle, { lower: true }),
+    title: truthyOrFalsyTitle,
+    content: 'Truthy and falsy are JavaScript concepts that...',
+    courseId: JAVASCRIPT_COURSE_ID,
+  },
+].map((x, i) => ({ ...x, order: i }))
 
 export const generateFunSeedData = () => {
   const questions: QuestionWithoutRelations[] = []
