@@ -1,15 +1,18 @@
 import type { CourseSectionWithRelations } from '@mr-ss/database'
 import Link from 'next/link'
+import type { PropsWithChildren } from 'react'
 
 interface Props {
   section: CourseSectionWithRelations
 }
 
-export default function CourseSection({ section }: Props) {
+export default function CourseSection({
+  section,
+  children,
+}: PropsWithChildren<Props>) {
   return (
-    <>
-      <div>{section.title}</div>
-      <div>{section.content}</div>
+    <div className="flex flex-col gap-2">
+      {children}
       <div>
         {section.quizzes.map((quiz) => (
           <div key={quiz.id}>
@@ -18,6 +21,6 @@ export default function CourseSection({ section }: Props) {
           </div>
         ))}
       </div>
-    </>
+    </div>
   )
 }

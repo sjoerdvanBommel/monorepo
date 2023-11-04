@@ -31,7 +31,7 @@ export const courses: readonly CourseWithoutRelations[] = [
     slug: JAVASCRIPT_COURSE_SLUG,
     title: JAVASCRIPT_COURSE_TITLE,
     description:
-      'JavaScript is big. Almost every developer has been in touch with JavaScript at some point in their career. Mastering it is therefore a very useful skill. This interactive course will adapt to your experience level and provide you hands-on challenges, dynamic exercises, and expert guidance!',
+      'JavaScript is big. Almost every developer has been in touch with JavaScript at some point in their career. Mastering it is therefore a very useful skill and will become exponentially easier using hands-on challenges & dynamic exercises!',
     imageUrl:
       'https://mr-ss-bucket-staging.s3.eu-west-2.amazonaws.com/javascript+logo.png',
   },

@@ -1,3 +1,4 @@
+import withMDX from '@next/mdx'
 import { PrismaPlugin } from '@prisma/nextjs-monorepo-workaround-plugin'
 
 /**
@@ -16,6 +17,16 @@ const config = {
   eslint: {
     dirs: ['app', 'backend', 'components', 'lib', 'providers'],
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'mr-ss-bucket-staging.s3.eu-west-2.amazonaws.com',
+        port: '',
+      },
+    ],
+  },
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
 }
 
-export default config
+export default withMDX()(config)

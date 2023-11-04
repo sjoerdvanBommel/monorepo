@@ -1,5 +1,6 @@
 import { getCourseSection } from '@/backend/actions/course-section-actions'
 import CourseSection from '@/components/course-section/course-section'
+import { MDX } from '@/mdx-components'
 import { notFound } from 'next/navigation'
 
 export default async function SectionPage({
@@ -14,5 +15,9 @@ export default async function SectionPage({
 
   if (!section) return notFound()
 
-  return <CourseSection section={section} />
+  return (
+    <CourseSection section={section}>
+      <MDX source={section.content} />
+    </CourseSection>
+  )
 }

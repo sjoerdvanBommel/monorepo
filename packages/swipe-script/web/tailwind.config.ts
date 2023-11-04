@@ -72,6 +72,10 @@ const config: Config = {
       dropShadow: {
         white: '0 4px 6px rgb(var(--white-accent) / 0.15)',
       },
+
+      boxShadow: {
+        glow: `0 0 50px -5px var(--tw-shadow-color)`,
+      },
     },
     colors: {
       transparent: 'transparent',
@@ -106,7 +110,7 @@ const config: Config = {
         foreground: 'var(--primary-foreground)',
       },
       secondary: {
-        DEFAULT: 'var(--secondary)',
+        DEFAULT: 'hsl(336 100% 54%)',
         foreground: 'var(--secondary-foreground)',
       },
       destructive: {

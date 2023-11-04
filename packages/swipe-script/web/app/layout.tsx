@@ -29,7 +29,7 @@ export default function RootLayout({
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </head>
       <body
-        className={`w-full h-full ${titanOne.variable} ${fredoka.variable} ${consolas.variable}`}
+        className={`w-full h-full overflow-x-hidden ${titanOne.variable} ${fredoka.variable} ${consolas.variable}`}
       >
         <div className="w-full h-full flex flex-col relative p-2">
           {children}
