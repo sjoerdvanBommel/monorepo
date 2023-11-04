@@ -1,5 +1,6 @@
-import withMDX from '@next/mdx'
+import createMDX from '@next/mdx'
 import { PrismaPlugin } from '@prisma/nextjs-monorepo-workaround-plugin'
+import rehypeHighlight from 'rehype-highlight'
 
 /**
  * @type {import('next').NextConfig}
@@ -29,4 +30,11 @@ const config = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
 }
 
-export default withMDX()(config)
+const withMDX = createMDX({
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [rehypeHighlight],
+  },
+})
+
+export default withMDX(config)

@@ -11,7 +11,7 @@ export default function CourseSection({
   children,
 }: PropsWithChildren<Props>) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 text-justify hyphens-auto">
       {children}
       <div>
         {section.quizzes.map((quiz) => (

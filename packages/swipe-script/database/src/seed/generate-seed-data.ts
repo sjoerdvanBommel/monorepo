@@ -1,3 +1,4 @@
+import fs from 'fs'
 import slugify from 'slugify'
 import type {
   Answer,
@@ -65,49 +66,6 @@ const truthyOrFalsyTitle = 'Truthy or Falsy?'
 const declaringVariablesTitle = 'Declaring variables'
 const arraysTitle = 'Arrays'
 
-export const sections: readonly Omit<CourseSection, 'quizzes'>[] = [
-  {
-    id: INTRODUCTION_SECTION_ID,
-    slug: slugify(introductionTitle, { lower: true }),
-    title: introductionTitle,
-    courseId: JAVASCRIPT_COURSE_ID,
-    content: `
-      # JavaScript Introduction
-
-      TODO JavaScript introduction
-    `,
-  },
-  {
-    id: 2,
-    slug: slugify(declaringVariablesTitle, { lower: true }),
-    title: declaringVariablesTitle,
-    courseId: JAVASCRIPT_COURSE_ID,
-    content: `
-      # Declaring variables
-
-      TODO Declaring variables
-    `,
-  },
-  {
-    id: 3,
-    slug: slugify(arraysTitle, { lower: true }),
-    title: arraysTitle,
-    courseId: JAVASCRIPT_COURSE_ID,
-    content: `
-      # Arrays
-
-      TODO Arrays
-    `,
-  },
-  {
-    id: TRUTHY_OR_FALSY_SECTION_ID,
-    slug: slugify(truthyOrFalsyTitle, { lower: true }),
-    title: truthyOrFalsyTitle,
-    content: 'Truthy and falsy are JavaScript concepts that...',
-    courseId: JAVASCRIPT_COURSE_ID,
-  },
-].map((x, i) => ({ ...x, order: i }))
-
 export const generateFunSeedData = () => {
   const questions: QuestionWithoutRelations[] = []
   const answers: Answer[] = []
@@ -147,6 +105,50 @@ export const generateFunSeedData = () => {
       generateQuestion(question)
     })
   }
+
+  const data = fs.readFileSync(
+    process.cwd() + '/src/seed/content/introduction.md',
+    'utf8',
+  )
+
+  const sections: readonly Omit<CourseSection, 'quizzes'>[] = [
+    {
+      id: INTRODUCTION_SECTION_ID,
+      slug: slugify(introductionTitle, { lower: true }),
+      title: introductionTitle,
+      courseId: JAVASCRIPT_COURSE_ID,
+      content: data,
+    },
+    {
+      id: 2,
+      slug: slugify(declaringVariablesTitle, { lower: true }),
+      title: declaringVariablesTitle,
+      courseId: JAVASCRIPT_COURSE_ID,
+      content: `
+      # Declaring variables
+
+      TODO Declaring variables
+    `,
+    },
+    {
+      id: 3,
+      slug: slugify(arraysTitle, { lower: true }),
+      title: arraysTitle,
+      courseId: JAVASCRIPT_COURSE_ID,
+      content: `
+      # Arrays
+
+      TODO Arrays
+    `,
+    },
+    {
+      id: TRUTHY_OR_FALSY_SECTION_ID,
+      slug: slugify(truthyOrFalsyTitle, { lower: true }),
+      title: truthyOrFalsyTitle,
+      content: 'Truthy and falsy are JavaScript concepts that...',
+      courseId: JAVASCRIPT_COURSE_ID,
+    },
+  ].map((x, i) => ({ ...x, order: i }))
 
   /**
    * try { return 2 } finally { return 3 }
