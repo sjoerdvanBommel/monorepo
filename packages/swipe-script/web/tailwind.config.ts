@@ -17,6 +17,7 @@ const config: Config = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './mdx-components.tsx',
+    '../database/src/seed/content/**/*.mdx',
   ],
   theme: {
     container: {

@@ -107,7 +107,7 @@ export const generateFunSeedData = () => {
   }
 
   const data = fs.readFileSync(
-    process.cwd() + '/src/seed/content/introduction.md',
+    process.cwd() + '/src/seed/content/introduction.mdx',
     'utf8',
   )
 

@@ -39,7 +39,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </SheetContent>
         </Sheet>
       </header>
-      <div className="w-auto flex-grow py-4 px-2">{children}</div>
+      <div className="w-auto flex-grow flex flex-col pt-4 pb-2 px-2">
+        {children}
+      </div>
     </>
   )
 }
