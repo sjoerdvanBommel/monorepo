@@ -4,16 +4,19 @@ import type {
   Answer,
   CourseSection,
   CourseWithoutRelations,
-  QuestionType,
   QuestionWithoutRelations,
   Quiz,
 } from '../client'
+import {
+  answers as courseAnswers,
+  questions as courseQuestions,
+} from './content/the-interactive-javascript-journey/questions'
+import { TRUTHY_OR_FALSY_QT_ID, questionTypes } from './question-types'
 
 const JAVASCRIPT_COURSE_ID = 1
 const JAVASCRIPT_COURSE_TITLE = 'The Interactive JavaScript Journey'
 const JAVASCRIPT_COURSE_SLUG = slugify(JAVASCRIPT_COURSE_TITLE, { lower: true })
 
-const TRUTHY_OR_FALSY_QT_ID = 1
 const TRUTHY_OR_FALSY_QUIZ_ID = 1
 const TRUTHY_OR_FALSY_QUIZ_TITLE = 'JavaScript: Truthy or Falsy?'
 const TRUTHY_OR_FALSY_QUIZ_SLUG = slugify(TRUTHY_OR_FALSY_QUIZ_TITLE, {
@@ -37,13 +40,6 @@ export const courses: readonly CourseWithoutRelations[] = [
       'https://mr-ss-bucket-staging.s3.eu-west-2.amazonaws.com/javascript+logo.png',
   },
 ]
-
-export const questionTypes: readonly QuestionType[] = [
-  {
-    id: TRUTHY_OR_FALSY_QT_ID,
-    typeName: 'Truthy or Falsy?',
-  },
-] as const
 
 export const quizzes: readonly Omit<Quiz, 'questions'>[] = [
   {
@@ -259,95 +255,8 @@ export const generateFunSeedData = () => {
     `isNaN({} + {})`,
   ])
 
+  questions.push(...courseQuestions)
+  answers.push(...courseAnswers)
+
   return { questionTypes, questions, answers, quizzes, courses, sections }
 }
-
-/**
-
-interface Situation {
-  label: string
-  difficulty_level: number
-}
-
-const situations: Situation[] = [
-  { label: 'true', difficulty_level: 1 },
-  { label: 'false', difficulty_level: 1 },
-  { label: '0', difficulty_level: 2 },
-  { label: "''", difficulty_level: 3 },
-  { label: 'null', difficulty_level: 2 },
-  { label: 'undefined', difficulty_level: 2 },
-  { label: 'NaN', difficulty_level: 4 },
-  { label: 'Infinity', difficulty_level: 4 },
-  { label: '[]', difficulty_level: 3 },
-  { label: '{}', difficulty_level: 3 },
-  { label: 'Symbol()', difficulty_level: 4 },
-  { label: "Symbol('foo')", difficulty_level: 4 },
-]
-
-export const generateSeedData = () => {
-  const questions: Omit<Question, 'answers'>[] = []
-  const answers: Answer[] = []
-
-  let questionId = 1
-  let answerId = 1
-
-  situations.forEach((situation1) => {
-    situations.forEach((situation2) => {
-      const question1Text = `${situation1.label} == ${situation2.label}`
-
-      answers.push(
-        {
-          id: answerId++,
-          isCorrect: !!(0, eval)(`(${question1Text})`),
-          answerText: 'Truthy',
-          questionId: questionId,
-        },
-        {
-          id: answerId++,
-          isCorrect: !(0, eval)(`(${question1Text})`),
-          answerText: 'Falsy',
-          questionId: questionId,
-        },
-      )
-
-      questions.push({
-        id: questionId++,
-        questionText: question1Text,
-        questionTypeId: TRUTHY_OR_FALSY_QT_ID,
-        quizSlug: TRUTHY_OR_FALSY_QUIZ_SLUG,
-      })
-
-      const question2Text = `${situation1.label} === ${situation2.label}`
-
-      answers.push(
-        {
-          id: answerId++,
-          isCorrect: !!(0, eval)(`(${question2Text})`),
-          answerText: 'Truthy',
-          questionId: questionId,
-        },
-        {
-          id: answerId++,
-          isCorrect: !(0, eval)(`(${question2Text})`),
-          answerText: 'Falsy',
-          questionId: questionId,
-        },
-      )
-
-      questions.push({
-        id: questionId++,
-        questionText: question2Text,
-        questionTypeId: TRUTHY_OR_FALSY_QT_ID,
-        quizSlug: TRUTHY_OR_FALSY_QUIZ_SLUG,
-      })
-    })
-  })
-
-  return {
-    answers,
-    questions,
-    questionTypes,
-  }
-}
-
-*/

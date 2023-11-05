@@ -22,8 +22,8 @@ model Question {
   questionTypeId        Int                 @map("question_type_id")
   questionType          QuestionType        @relation(fields: [questionTypeId], references: [id])
   answers               Answer[]
-  quizId                Int                 @map("quiz_id")
-  quiz                  Quiz                @relation(fields: [quizId], references: [id])
+  quizId                Int?                @map("quiz_id")
+  quiz                  Quiz?               @relation(fields: [quizId], references: [id])
 }
 
 model QuestionType {

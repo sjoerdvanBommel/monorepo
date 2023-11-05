@@ -1,4 +1,5 @@
 import { CounterButton } from '@/components/mdx/counter-button'
+import { InlineQuestion } from '@/components/mdx/inline-question'
 import 'highlight.js/styles/vs2015.css'
 import type { MDXComponents } from 'mdx/types'
 import { MDXRemote, type MDXRemoteProps } from 'next-mdx-remote/rsc'
@@ -31,6 +32,7 @@ const components: MDXComponents = {
     </img>
   ),
   CounterButton,
+  InlineQuestion,
 }
 
 export function useMDXComponents(
