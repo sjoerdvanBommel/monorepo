@@ -106,18 +106,12 @@ export const generateFunSeedData = () => {
     })
   }
 
-  const data = fs.readFileSync(
-    process.cwd() + '/src/seed/content/introduction.mdx',
-    'utf8',
-  )
-
   const sections: readonly Omit<CourseSection, 'quizzes'>[] = [
     {
       id: INTRODUCTION_SECTION_ID,
       slug: slugify(introductionTitle, { lower: true }),
       title: introductionTitle,
       courseId: JAVASCRIPT_COURSE_ID,
-      content: data,
     },
     {
       id: 2,
@@ -148,7 +142,15 @@ export const generateFunSeedData = () => {
       content: 'Truthy and falsy are JavaScript concepts that...',
       courseId: JAVASCRIPT_COURSE_ID,
     },
-  ].map((x, i) => ({ ...x, order: i }))
+  ].map((x, i) => ({
+    ...x,
+    order: i,
+    content: fs.readFileSync(
+      process.cwd() +
+        `/src/seed/content/${JAVASCRIPT_COURSE_SLUG}/${x.slug}.mdx`,
+      'utf8',
+    ),
+  }))
 
   /**
    * try { return 2 } finally { return 3 }
